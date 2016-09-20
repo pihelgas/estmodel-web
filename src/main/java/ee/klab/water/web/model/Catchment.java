@@ -10,6 +10,7 @@ public class Catchment implements Serializable {
     private double area;
     private double runoff;
     private double streamVelocity;
+    private int naturalDischargeType;
     private double forestArea;
     private double forestSoil1Percentage;
     private double forestSoil2Percentage;
@@ -82,6 +83,14 @@ public class Catchment implements Serializable {
 
     public void setStreamVelocity(double streamVelocity) {
         this.streamVelocity = streamVelocity;
+    }
+
+    public int getNaturalDischargeType() {
+        return naturalDischargeType;
+    }
+
+    public void setNaturalDischargeType(int naturalDischargeType) {
+        this.naturalDischargeType = naturalDischargeType;
     }
 
     public double getForestArea() {
