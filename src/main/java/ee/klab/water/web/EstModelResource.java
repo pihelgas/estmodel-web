@@ -31,6 +31,18 @@ import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
 import static ee.klab.water.model.Lake.volume;
 import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
 import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
 
 @Path("/")
 public class EstModelResource {
@@ -299,7 +311,7 @@ public class EstModelResource {
 
                         double time = point.getDistance() * 1000 / catchment.getStreamVelocity() / Duration.ofDays(1).getSeconds(); // aeg punktallikast vaadeldava kohani ööpäevades
 
-                        double retention = agent.getMaxRetention() * time / (agent.getHalfRetentionTime() + time);
+                        double retention = agent.getMaxRetentionPercentage() * time / (agent.getHalfRetentionTime() + time);
 
                         double load = point.getFlow() * agent.getConcentration() * period / 1000; //punktallikast tulev koormus perioodil kilogrammides
 

@@ -126,6 +126,8 @@ public class Lake implements Serializable {
     public static class Estimation implements Serializable {
 
         private double concentration;
+        private double load;
+        private double retentionPercentage;
         private double retentionTime;
 
         public Estimation() {
@@ -133,15 +135,31 @@ public class Lake implements Serializable {
         }
 
         public double getConcentration() {
-            return concentration;
+            return this.concentration;
         }
 
         public void setConcentration(double concentration) {
             this.concentration = concentration;
         }
 
+        public double getLoad() {
+            return this.load;
+        }
+
+        public void setLoad(double load) {
+            this.load = load;
+        }
+
+        public double getRetentionPercentage() {
+            return this.retentionPercentage;
+        }
+
+        public void setRetentionPercentage(double retentionPercentage) {
+            this.retentionPercentage = retentionPercentage;
+        }
+
         public double getRetentionTime() {
-            return retentionTime;
+            return this.retentionTime;
         }
 
         public void setRetentionTime(double retentionTime) {

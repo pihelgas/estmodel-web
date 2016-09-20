@@ -69,7 +69,7 @@ public class PointSource implements Serializable {
 
         private double concentration;
         private double halfRetentionTime;
-        private double maxRetention;
+        private double maxRetentionPercentage;
         private String parameter;
 
         public Measurement() {
@@ -92,12 +92,12 @@ public class PointSource implements Serializable {
             this.halfRetentionTime = halfRetentionTime;
         }
 
-        public double getMaxRetention() {
-            return this.maxRetention;
+        public double getMaxRetentionPercentage() {
+            return this.maxRetentionPercentage;
         }
 
-        public void setMaxRetention(double maxRetention) {
-            this.maxRetention = maxRetention;
+        public void setMaxRetentionPercentage(double maxRetentionPercentage) {
+            this.maxRetentionPercentage = maxRetentionPercentage;
         }
 
         public String getParameter() {
