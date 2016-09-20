@@ -27,6 +27,10 @@ import java.util.stream.Stream;
 import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
 import static ee.klab.water.model.Lake.volume;
 import java.time.Duration;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
 
 @Path("/")
 public class EstModelResource {
@@ -287,7 +291,7 @@ public class EstModelResource {
 
         if (catchment.getPointSources() != null) {
             return catchment.getPointSources().stream().mapToDouble(point
-                    -> point.getAgents()
+                    -> point.getMeasurements()
                     .stream()
                     .filter(agent -> parameter.name()
                             .equalsIgnoreCase(agent.getParameter()))
