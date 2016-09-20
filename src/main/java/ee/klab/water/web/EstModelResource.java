@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
 import static ee.klab.water.model.Lake.volume;
+import java.time.Duration;
 
 @Path("/")
 public class EstModelResource {
@@ -285,18 +286,18 @@ public class EstModelResource {
     public double load(Catchment catchment, long period, Parameter parameter) {
 
         if (catchment.getPointSources() != null) {
-            return catchment.getPointSources().stream().mapToDouble(source
-                    -> source.getAgents()
+            return catchment.getPointSources().stream().mapToDouble(point
+                    -> point.getAgents()
                     .stream()
                     .filter(agent -> parameter.name()
                             .equalsIgnoreCase(agent.getParameter()))
                     .mapToDouble(agent -> {
 
-                        double time = source.getDistance() * 1000 / source.getVelocity() / 86400; // aeg punktallikast vaadeldava kohani ööpäevades
+                        double time = point.getDistance() * 1000 / catchment.getStreamVelocity() / Duration.ofDays(1).getSeconds(); // aeg punktallikast vaadeldava kohani ööpäevades
 
                         double retention = agent.getMaxRetention() * time / (agent.getHalfRetentionTime() + time);
 
-                        double load = source.getFlow() * agent.getConcentration() * period / 1000; //punktallikast tulev koormus perioodil kilogrammides
+                        double load = point.getFlow() * agent.getConcentration() * period / 1000; //punktallikast tulev koormus perioodil kilogrammides
 
                         return load - (load * retention / 100);
 

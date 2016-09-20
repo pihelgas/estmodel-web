@@ -12,7 +12,6 @@ public class PointSource implements Serializable {
     private double distance;
     private double flow;
     private String type;
-    private double velocity;
 
     public PointSource() {
 
@@ -64,22 +63,6 @@ public class PointSource implements Serializable {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    /**
-     *
-     * @return the velocity (m/s) of the river
-     */
-    public double getVelocity() {
-        return this.velocity;
-    }
-
-    /**
-     *
-     * @param velocity the velocity (m/s) of the river
-     */
-    public void setVelocity(double velocity) {
-        this.velocity = velocity;
     }
 
     public static class Measurement implements Serializable {

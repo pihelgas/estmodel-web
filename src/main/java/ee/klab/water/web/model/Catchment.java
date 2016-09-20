@@ -9,6 +9,7 @@ public class Catchment implements Serializable {
     private int month;
     private double area;
     private double runoff;
+    private double streamVelocity;
     private double forestArea;
     private double forestSoil1Percentage;
     private double forestSoil2Percentage;
@@ -69,6 +70,18 @@ public class Catchment implements Serializable {
 
     public void setRunoff(double runoff) {
         this.runoff = runoff;
+    }
+
+    /**
+     *
+     * @return stream velocity (m/s)
+     */
+    public double getStreamVelocity() {
+        return this.streamVelocity;
+    }
+
+    public void setStreamVelocity(double streamVelocity) {
+        this.streamVelocity = streamVelocity;
     }
 
     public double getForestArea() {
