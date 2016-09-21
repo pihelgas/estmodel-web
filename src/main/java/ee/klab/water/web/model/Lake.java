@@ -13,6 +13,7 @@ public class Lake implements Serializable {
     private double depth;
     private double flow;
     private double load;
+    private String type;
     private int year;
 
     public Lake() {
@@ -113,6 +114,14 @@ public class Lake implements Serializable {
      */
     public void setLoad(double load) {
         this.load = load;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getYear() {
