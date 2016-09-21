@@ -34,7 +34,7 @@ public class Catchment implements Serializable {
     private double individualUncoupledSepticSystemPercentage;
     private double individualInfilitrationSepticSystemPercentage;
     private double aquacultureProduction;
-    private Collection<Agent> agents;
+    private Collection<Discharge> agents;
     private Collection<PointSource> pointSources;
 
     public Catchment() {
@@ -277,11 +277,11 @@ public class Catchment implements Serializable {
         this.aquacultureProduction = aquacultureProduction;
     }
 
-    public Collection<Agent> getAgents() {
+    public Collection<Discharge> getAgents() {
         return agents;
     }
 
-    public void setAgents(Collection<Agent> agents) {
+    public void setAgents(Collection<Discharge> agents) {
         this.agents = agents;
     }
 
@@ -293,14 +293,14 @@ public class Catchment implements Serializable {
         this.pointSources = pointSources;
     }
 
-    public static class Agent implements Serializable {
+    public static class Discharge implements Serializable {
 
         private String parameter;
         private double retentionPercentage;
         private double adjustmentCoefficient;
         private double atmosphericSpecificDischarge;
 
-        public Agent() {
+        public Discharge() {
 
         }
 

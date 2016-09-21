@@ -43,6 +43,276 @@ import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
 import static ee.klab.water.model.Lake.volume;
 import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
 import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
 
 @Path("/")
 public class EstModelResource {
@@ -115,9 +385,9 @@ public class EstModelResource {
                         .getIndividualInfilitrationSepticSystemPercentage())
                 .aquacultureProduction(catchment
                         .getAquacultureProduction())
-                .municipalWastewaterTreatmentPlantsNitrogenDischarge(
+                .industryNitrogenDischarge(
                         load(catchment, period, Parameter.NITROGEN))
-                .municipalWastewaterTreatmentPlantsPhosphorusDischarge(
+                .industryPhosphorusDischarge(
                         load(catchment, period, Parameter.PHOSPHORUS));
 
         double nitrogenRetentionPercentage = 0;
@@ -125,20 +395,20 @@ public class EstModelResource {
 
         if (catchment.getAgents() != null) {
 
-            final Optional<Catchment.Agent> nAgent = catchment.getAgents()
+            final Optional<Catchment.Discharge> nAgent = catchment.getAgents()
                     .stream()
                     .filter(a -> Parameter.NITROGEN.toString()
                             .equalsIgnoreCase(a.getParameter()))
                     .findFirst();
 
-            final Optional<Catchment.Agent> pAgent = catchment.getAgents()
+            final Optional<Catchment.Discharge> pAgent = catchment.getAgents()
                     .stream()
                     .filter(a -> Parameter.PHOSPHORUS.toString()
                             .equalsIgnoreCase(a.getParameter()))
                     .findFirst();
 
             if (nAgent.isPresent()) {
-                Catchment.Agent agent = nAgent.get();
+                Catchment.Discharge agent = nAgent.get();
                 builder = builder
                         .atmosphericNitrogenSpecificDischarge(agent
                                 .getAtmosphericSpecificDischarge())
@@ -150,7 +420,7 @@ public class EstModelResource {
             }
 
             if (pAgent.isPresent()) {
-                Catchment.Agent agent = pAgent.get();
+                Catchment.Discharge agent = pAgent.get();
                 builder = builder
                         .atmosphericPhosphorusSpecificDischarge(agent
                                 .getAtmosphericSpecificDischarge())

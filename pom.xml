@@ -21,7 +21,7 @@
         <dependency>
             <groupId>ee.klab.water</groupId>
             <artifactId>estmodel</artifactId>
-            <version>0.5</version>
+            <version>0.6</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
