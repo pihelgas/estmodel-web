@@ -8,30 +8,30 @@ import java.util.Collection;
  */
 public class EstModel implements Serializable {
 
-    private Collection<Estimation> estimates;
+    private Collection<Discharge> estimates;
 
     public EstModel() {
 
     }
 
-    public Collection<Estimation> getEstimates() {
+    public Collection<Discharge> getEstimates() {
         return estimates;
     }
 
-    public void setEstimates(Collection<Estimation> estimates) {
+    public void setEstimates(Collection<Discharge> estimates) {
         this.estimates = estimates;
     }
 
-    public static class Estimation implements Serializable {
+    public static class Discharge implements Serializable {
 
         private String parameter;
-        private Collection<Discharge> details;
+        private Collection<SourceDischarge> sources;
         private double anthropogenic;
         private double atmospheric;
         private double natural;
         private double total;
 
-        public Estimation() {
+        public Discharge() {
 
         }
 
@@ -43,12 +43,12 @@ public class EstModel implements Serializable {
             this.parameter = parameter;
         }
 
-        public Collection<Discharge> getDetails() {
-            return this.details;
+        public Collection<SourceDischarge> getSources() {
+            return this.sources;
         }
 
-        public void setDetails(final Collection<Discharge> details) {
-            this.details = details;
+        public void setSources(final Collection<SourceDischarge> sources) {
+            this.sources = sources;
         }
 
         public double getAnthropogenic() {
@@ -83,7 +83,7 @@ public class EstModel implements Serializable {
             this.total = total;
         }
 
-        public static class Discharge implements Serializable {
+        public static class SourceDischarge implements Serializable {
 
             private String source;
             private double anthropogenic;
@@ -91,7 +91,7 @@ public class EstModel implements Serializable {
             private double natural;
             private double total;
 
-            public Discharge() {
+            public SourceDischarge() {
 
             }
 

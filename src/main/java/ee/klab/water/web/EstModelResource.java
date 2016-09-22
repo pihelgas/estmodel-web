@@ -7,8 +7,8 @@ import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
 import static ee.klab.water.model.Lake.volume;
 import ee.klab.water.web.model.Catchment;
 import ee.klab.water.web.model.EstModel;
-import ee.klab.water.web.model.EstModel.Estimation;
-import ee.klab.water.web.model.EstModel.Estimation.Discharge;
+import ee.klab.water.web.model.EstModel.Discharge;
+import ee.klab.water.web.model.EstModel.Discharge.SourceDischarge;
 import ee.klab.water.web.model.Lake;
 import java.time.DateTimeException;
 import java.time.Duration;
@@ -209,14 +209,15 @@ public class EstModelResource {
         adapter.setEstimates(estModel.getEstimations()
                 .stream()
                 .map(e -> {
-                    Estimation estimation = new Estimation();
+                    Discharge estimation = new Discharge();
                     estimation.setParameter(e.getParameter()
                             .toString()
                             .toLowerCase());
-                    estimation.setDetails(e.getDetails()
+                    estimation.setSources(e.getDetails()
                             .stream()
                             .map(d -> {
-                                Discharge discharge = new Discharge();
+                                SourceDischarge discharge
+                                        = new SourceDischarge();
 
                                 String source = Stream
                                         .of(d.getSource()
@@ -233,7 +234,6 @@ public class EstModelResource {
                                         + source.substring(1);
 
                                 discharge.setSource(source);
-
                                 discharge.setAnthropogenic(d.anthropogenic());
                                 discharge.setAtmospheric(d.atmospheric());
                                 discharge.setNatural(d.natural());
@@ -241,9 +241,9 @@ public class EstModelResource {
                                 return discharge;
                             })
                             .collect(Collectors.toList()));
-                    estimation.setAnthropogenic(estimation.getDetails()
+                    estimation.setAnthropogenic(estimation.getSources()
                             .stream()
-                            .mapToDouble(Discharge::getAnthropogenic)
+                            .mapToDouble(SourceDischarge::getAnthropogenic)
                             .sum());
                     estimation.setAtmospheric(e.anthropogenic());
                     estimation.setNatural(e.natural());
