@@ -41,18 +41,34 @@ public class Catchment implements Serializable {
 
     }
 
+    /**
+     *
+     * @return the represented year
+     */
     public int getYear() {
         return this.year;
     }
 
+    /**
+     *
+     * @param year the ISO proleptic year to represent
+     */
     public void setYear(int year) {
         this.year = year;
     }
 
+    /**
+     *
+     * @return the represented month
+     */
     public int getMonth() {
         return this.month;
     }
 
+    /**
+     *
+     * @param month the month-of-year to represent, from 1 to 12
+     */
     public void setMonth(int month) {
         this.month = month;
     }

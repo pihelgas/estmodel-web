@@ -134,8 +134,7 @@ public class Lake implements Serializable {
 
     /**
      *
-     * @param year the ISO proleptic year to represent, from MIN_VALUE to
-     * MAX_VALUE
+     * @param year the ISO proleptic year to represent
      */
     public void setYear(int year) {
         this.year = year;
