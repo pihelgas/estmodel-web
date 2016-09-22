@@ -239,11 +239,8 @@ public class EstModelResource {
                                 return discharge;
                             })
                             .collect(Collectors.toList()));
-                    estimation.setAnthropogenic(estimation.getDetails()
-                            .stream()
-                            .mapToDouble(SourceDischarge::getAnthropogenic)
-                            .sum());
-                    estimation.setAtmospheric(e.anthropogenic());
+                    estimation.setAnthropogenic(e.anthropogenic());
+                    estimation.setAtmospheric(e.atmospheric());
                     estimation.setNatural(e.natural());
                     estimation.setTotal(e.total());
                     return estimation;
