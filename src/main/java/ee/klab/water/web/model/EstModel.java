@@ -25,7 +25,7 @@ public class EstModel implements Serializable {
     public static class Discharge implements Serializable {
 
         private String parameter;
-        private Collection<SourceDischarge> sources;
+        private Collection<SourceDischarge> details;
         private double anthropogenic;
         private double atmospheric;
         private double natural;
@@ -43,12 +43,12 @@ public class EstModel implements Serializable {
             this.parameter = parameter;
         }
 
-        public Collection<SourceDischarge> getSources() {
-            return this.sources;
+        public Collection<SourceDischarge> getDetails() {
+            return this.details;
         }
 
-        public void setSources(final Collection<SourceDischarge> sources) {
-            this.sources = sources;
+        public void setDetails(final Collection<SourceDischarge> details) {
+            this.details = details;
         }
 
         public double getAnthropogenic() {
@@ -96,7 +96,7 @@ public class EstModel implements Serializable {
             }
 
             public String getSource() {
-                return source;
+                return this.source;
             }
 
             public void setSource(String source) {

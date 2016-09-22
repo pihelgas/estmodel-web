@@ -25,6 +25,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
+import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
+import static ee.klab.water.model.Lake.volume;
 
 @Path("/")
 public class EstModelResource {
@@ -213,7 +217,7 @@ public class EstModelResource {
                     estimation.setParameter(e.getParameter()
                             .toString()
                             .toLowerCase());
-                    estimation.setSources(e.getDetails()
+                    estimation.setDetails(e.getDetails()
                             .stream()
                             .map(d -> {
                                 SourceDischarge discharge
@@ -241,7 +245,7 @@ public class EstModelResource {
                                 return discharge;
                             })
                             .collect(Collectors.toList()));
-                    estimation.setAnthropogenic(estimation.getSources()
+                    estimation.setAnthropogenic(estimation.getDetails()
                             .stream()
                             .mapToDouble(SourceDischarge::getAnthropogenic)
                             .sum());

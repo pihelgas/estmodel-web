@@ -8,29 +8,13 @@ import java.util.Collection;
  */
 public class PointSource implements Serializable {
 
-    private Collection<Measurement> measurements;
-    private String type;
     private double distance;
     private double flow;
+    private Collection<Measurement> measurements;
+    private String type;
 
     public PointSource() {
 
-    }
-
-    public Collection<Measurement> getMeasurements() {
-        return this.measurements;
-    }
-
-    public void setMeasurements(Collection<Measurement> measurements) {
-        this.measurements = measurements;
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     /**
@@ -63,6 +47,22 @@ public class PointSource implements Serializable {
      */
     public void setFlow(double flow) {
         this.flow = flow;
+    }
+
+    public Collection<Measurement> getMeasurements() {
+        return this.measurements;
+    }
+
+    public void setMeasurements(Collection<Measurement> measurements) {
+        this.measurements = measurements;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public static class Measurement implements Serializable {
