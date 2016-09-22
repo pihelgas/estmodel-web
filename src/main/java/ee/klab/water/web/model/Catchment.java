@@ -42,7 +42,7 @@ public class Catchment implements Serializable {
     }
 
     public int getYear() {
-        return year;
+        return this.year;
     }
 
     public void setYear(int year) {
@@ -50,7 +50,7 @@ public class Catchment implements Serializable {
     }
 
     public int getMonth() {
-        return month;
+        return this.month;
     }
 
     public void setMonth(int month) {
@@ -58,7 +58,7 @@ public class Catchment implements Serializable {
     }
 
     public double getArea() {
-        return area;
+        return this.area;
     }
 
     public void setArea(double area) {
@@ -66,7 +66,7 @@ public class Catchment implements Serializable {
     }
 
     public double getRunoff() {
-        return runoff;
+        return this.runoff;
     }
 
     public void setRunoff(double runoff) {
@@ -86,7 +86,7 @@ public class Catchment implements Serializable {
     }
 
     public int getNaturalDischargeType() {
-        return naturalDischargeType;
+        return this.naturalDischargeType;
     }
 
     public void setNaturalDischargeType(int naturalDischargeType) {
@@ -94,7 +94,7 @@ public class Catchment implements Serializable {
     }
 
     public double getForestArea() {
-        return forestArea;
+        return this.forestArea;
     }
 
     public void setForestArea(double forestArea) {
@@ -102,7 +102,7 @@ public class Catchment implements Serializable {
     }
 
     public double getForestSoil1Percentage() {
-        return forestSoil1Percentage;
+        return this.forestSoil1Percentage;
     }
 
     public void setForestSoil1Percentage(double forestSoil1Percentage) {
@@ -110,7 +110,7 @@ public class Catchment implements Serializable {
     }
 
     public double getForestSoil2Percentage() {
-        return forestSoil2Percentage;
+        return this.forestSoil2Percentage;
     }
 
     public void setForestSoil2Percentage(double forestSoil2Percentage) {
@@ -118,7 +118,7 @@ public class Catchment implements Serializable {
     }
 
     public double getFelledForestPercentage() {
-        return felledForestPercentage;
+        return this.felledForestPercentage;
     }
 
     public void setFelledForestPercentage(double felledForestPercentage) {
@@ -126,7 +126,7 @@ public class Catchment implements Serializable {
     }
 
     public double getDrainedForestPercentage() {
-        return drainedForestPercentage;
+        return this.drainedForestPercentage;
     }
 
     public void setDrainedForestPercentage(double drainedForestPercentage) {
@@ -134,7 +134,7 @@ public class Catchment implements Serializable {
     }
 
     public double getFertilizedForestPercentage() {
-        return fertilizedForestPercentage;
+        return this.fertilizedForestPercentage;
     }
 
     public void setFertilizedForestPercentage(double fertilizedForestPercentage) {
@@ -142,7 +142,7 @@ public class Catchment implements Serializable {
     }
 
     public double getWetLandArea() {
-        return wetLandArea;
+        return this.wetLandArea;
     }
 
     public void setWetLandArea(double wetLandArea) {
@@ -150,7 +150,7 @@ public class Catchment implements Serializable {
     }
 
     public double getWetLandType1Percentage() {
-        return wetLandType1Percentage;
+        return this.wetLandType1Percentage;
     }
 
     public void setWetLandType1Percentage(double wetLandType1Percentage) {
@@ -158,7 +158,7 @@ public class Catchment implements Serializable {
     }
 
     public double getWetLandType2Percentage() {
-        return wetLandType2Percentage;
+        return this.wetLandType2Percentage;
     }
 
     public void setWetLandType2Percentage(double wetLandType2Percentage) {
@@ -166,7 +166,7 @@ public class Catchment implements Serializable {
     }
 
     public double getWaterSurfaceArea() {
-        return waterSurfaceArea;
+        return this.waterSurfaceArea;
     }
 
     public void setWaterSurfaceArea(double waterSurfaceArea) {
@@ -174,7 +174,7 @@ public class Catchment implements Serializable {
     }
 
     public double getAgriculturalLandArea() {
-        return agriculturalLandArea;
+        return this.agriculturalLandArea;
     }
 
     public void setAgriculturalLandArea(double agriculturalLandArea) {
@@ -182,7 +182,7 @@ public class Catchment implements Serializable {
     }
 
     public double getWintergreenAgriculturalLandPercentage() {
-        return wintergreenAgriculturalLandPercentage;
+        return this.wintergreenAgriculturalLandPercentage;
     }
 
     public void setWintergreenAgriculturalLandPercentage(double wintergreenAgriculturalLandPercentage) {
@@ -190,7 +190,7 @@ public class Catchment implements Serializable {
     }
 
     public double getLivestock() {
-        return livestock;
+        return this.livestock;
     }
 
     public void setLivestock(double livestock) {
@@ -198,7 +198,7 @@ public class Catchment implements Serializable {
     }
 
     public double getDairyCows() {
-        return dairyCows;
+        return this.dairyCows;
     }
 
     public void setDairyCows(double dairyCows) {
@@ -206,7 +206,7 @@ public class Catchment implements Serializable {
     }
 
     public double getDairyUncoupledSepticSystemPercentage() {
-        return dairyUncoupledSepticSystemPercentage;
+        return this.dairyUncoupledSepticSystemPercentage;
     }
 
     public void setDairyUncoupledSepticSystemPercentage(double dairyUncoupledSepticSystemPercentage) {
@@ -214,7 +214,7 @@ public class Catchment implements Serializable {
     }
 
     public double getDairyInfiltrationSepticSystemPercentage() {
-        return dairyInfiltrationSepticSystemPercentage;
+        return this.dairyInfiltrationSepticSystemPercentage;
     }
 
     public void setDairyInfiltrationSepticSystemPercentage(double dairyInfiltrationSepticSystemPercentage) {
@@ -222,7 +222,7 @@ public class Catchment implements Serializable {
     }
 
     public double getDairyManureStorageSystemPercentage() {
-        return dairyManureStorageSystemPercentage;
+        return this.dairyManureStorageSystemPercentage;
     }
 
     public void setDairyManureStorageSystemPercentage(double dairyManureStorageSystemPercentage) {
@@ -230,7 +230,7 @@ public class Catchment implements Serializable {
     }
 
     public double getLeakingManureStorageSystemPercentage() {
-        return leakingManureStorageSystemPercentage;
+        return this.leakingManureStorageSystemPercentage;
     }
 
     public void setLeakingManureStorageSystemPercentage(double leakingManureStorageSystemPercentage) {
@@ -238,7 +238,7 @@ public class Catchment implements Serializable {
     }
 
     public double getIndividualWastewaterTreatmentPlants() {
-        return individualWastewaterTreatmentPlants;
+        return this.individualWastewaterTreatmentPlants;
     }
 
     public void setIndividualWastewaterTreatmentPlants(double individualWastewaterTreatmentPlants) {
@@ -246,7 +246,7 @@ public class Catchment implements Serializable {
     }
 
     public double getIndividualDryToiletSystemPercentage() {
-        return individualDryToiletSystemPercentage;
+        return this.individualDryToiletSystemPercentage;
     }
 
     public void setIndividualDryToiletSystemPercentage(double individualDryToiletSystemPercentage) {
@@ -254,7 +254,7 @@ public class Catchment implements Serializable {
     }
 
     public double getIndividualUncoupledSepticSystemPercentage() {
-        return individualUncoupledSepticSystemPercentage;
+        return this.individualUncoupledSepticSystemPercentage;
     }
 
     public void setIndividualUncoupledSepticSystemPercentage(double individualUncoupledSepticSystemPercentage) {
@@ -262,7 +262,7 @@ public class Catchment implements Serializable {
     }
 
     public double getIndividualInfilitrationSepticSystemPercentage() {
-        return individualInfilitrationSepticSystemPercentage;
+        return this.individualInfilitrationSepticSystemPercentage;
     }
 
     public void setIndividualInfilitrationSepticSystemPercentage(double individualInfilitrationSepticSystemPercentage) {
@@ -270,7 +270,7 @@ public class Catchment implements Serializable {
     }
 
     public double getAquacultureProduction() {
-        return aquacultureProduction;
+        return this.aquacultureProduction;
     }
 
     public void setAquacultureProduction(double aquacultureProduction) {
@@ -278,7 +278,7 @@ public class Catchment implements Serializable {
     }
 
     public Collection<Discharge> getAgents() {
-        return agents;
+        return this.agents;
     }
 
     public void setAgents(Collection<Discharge> agents) {
@@ -286,7 +286,7 @@ public class Catchment implements Serializable {
     }
 
     public Collection<PointSource> getPointSources() {
-        return pointSources;
+        return this.pointSources;
     }
 
     public void setPointSources(Collection<PointSource> pointSources) {

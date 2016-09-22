@@ -84,10 +84,18 @@ public class PointSource implements Serializable {
             this.concentration = concentration;
         }
 
+        /**
+         *
+         * @return half retention time (year)
+         */
         public double getHalfRetentionTime() {
             return this.halfRetentionTime;
         }
 
+        /**
+         *
+         * @param halfRetentionTime half retention time (year)
+         */
         public void setHalfRetentionTime(double halfRetentionTime) {
             this.halfRetentionTime = halfRetentionTime;
         }
