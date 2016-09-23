@@ -175,15 +175,17 @@ public class EstModelResource {
 
         } else if ("stratified".equalsIgnoreCase(lake.getType())) {
 
-            double inputLoad = lake.getLoad() * 1000
+            double Lext = lake.getLoad() * 1000
                     / lake.getArea(); // mg/m2/yr
             
             double q = lake.getDepth() / retentionTime; // m/yr
             double r = 15 / (18 + q); // yr/m
 
-            double outputLoad = inputLoad / (q * (1 - r)); // mg/m2/yr
+            double Pepi = Lext / (q * (1 - r)); // mg/m2/yr
             
-            outputConcentration = outputLoad;
+            double meieLoad = Pepi;
+            
+            outputConcentration = meieLoad;
 
         } else {
 
