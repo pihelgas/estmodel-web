@@ -18,6 +18,8 @@ import java.time.Year;
 import static java.time.temporal.ChronoUnit.SECONDS;
 import java.time.temporal.TemporalField;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+import static java.util.concurrent.TimeUnit.DAYS;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.ws.rs.Consumes;
@@ -158,12 +160,12 @@ public class EstModelResource {
     @Produces(MediaType.APPLICATION_JSON)
     public EstModel.Lake post(Lake lake) {
 
-        Year year = Year.of(lake.getYear());
-        double flow = lake.getFlow() * year.length() * 86400; // m3/yr
-        double volume = lake.getArea() * 1000000 * lake.getDepth(); // m3
-        double retentionTime = flow / volume; // yr
+        final Year year = Year.of(lake.getYear());
+        final double flow = lake.getFlow() * DAYS.toSeconds(year.length()); // m3/yr
+        final double volume = lake.getArea() * 1000000 * lake.getDepth(); // m3
+        final double retentionTime = flow / volume; // yr
+        final double inputConcentration = lake.getLoad() * 1000 / flow; // g/m3 = mg/l
 
-        double inputConcentration = lake.getLoad() * 1000 / flow; // g/m3 = mg/l
         double outputConcentration; // g/m3 = mg/l
 
         if ("limnological".equalsIgnoreCase(lake.getType())) {
@@ -175,16 +177,14 @@ public class EstModelResource {
 
         } else if ("stratified".equalsIgnoreCase(lake.getType())) {
 
-            double Lext = lake.getLoad() * 1000000
+            double inputLoad = lake.getLoad() * 1000000
                     / lake.getArea(); // mg/m2/yr
-            
+
             double q = lake.getDepth() / retentionTime; // m/yr
             double r = 15 / (18 + q); // yr/m
+            double outputLoad = inputLoad / (q * (1 - r)); // mg/m2/yr
 
-            double Pepi = Lext / (q * (1 - r)); // mg/m2/yr
-            
-            double load = Pepi / 1000000 * lake.getArea(); // kg/a
-            
+            double load = outputLoad / 1000000 * lake.getArea(); // kg/a
             outputConcentration = load * 1000 / flow;
 
         } else {
@@ -194,12 +194,13 @@ public class EstModelResource {
 
         }
 
-        double load = outputConcentration * flow / 1000; // kg/a
+        final double load = outputConcentration * flow / 1000; // kg/a
+        final double retentionPercentage = (1 - (load / lake.getLoad())) * 100;
 
         EstModel.Lake estimation = new EstModel.Lake();
         estimation.setConcentration(outputConcentration);
         estimation.setLoad(load);
-        estimation.setRetentionPercentage((1 - (load / lake.getLoad())) * 100);
+        estimation.setRetentionPercentage(retentionPercentage);
         estimation.setRetentionTime(retentionTime);
         return estimation;
 
