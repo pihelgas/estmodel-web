@@ -197,12 +197,10 @@ public class EstModelResource {
         double load = outputConcentration * flow / 1000; // kg/a
 
         EstModel.Lake estimation = new EstModel.Lake();
-
         estimation.setConcentration(outputConcentration);
         estimation.setLoad(load);
-        estimation.setRetentionPercentage(load / lake.getLoad());
+        estimation.setRetentionPercentage((1 - (load / lake.getLoad())) * 100);
         estimation.setRetentionTime(retentionTime);
-        
         return estimation;
 
     }
