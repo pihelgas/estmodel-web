@@ -13,8 +13,10 @@ import ee.klab.water.web.model.Lake;
 import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.Year;
 import static java.time.temporal.ChronoUnit.SECONDS;
+import java.time.temporal.TemporalField;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -156,9 +158,10 @@ public class EstModelResource {
     @Produces(MediaType.APPLICATION_JSON)
     public EstModel.Lake post(Lake lake) {
 
-        double flow = lake.getFlow();
+        Year year = Year.of(lake.getYear());
+        double flow = lake.getFlow() * year.length() * Duration.ofDays(1).getSeconds();
         double volume = volume(lake.getArea(), lake.getDepth());
-        double retentionTime = retentionTime(flow, volume);
+        double retentionTime = flow / volume;
 
         double inputConcentration = lake.getLoad() * 1000 / flow;
         double outputConcentration;
