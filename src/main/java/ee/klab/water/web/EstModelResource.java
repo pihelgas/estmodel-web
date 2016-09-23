@@ -183,9 +183,9 @@ public class EstModelResource {
 
             double Pepi = Lext / (q * (1 - r)); // mg/m2/yr
             
-            double load = Pepi / 1000000 * lake.getArea();
+            double load = Pepi / 1000000 * lake.getArea(); // kg/a
             
-            outputConcentration = load;
+            outputConcentration = load / flow;
 
         } else {
 
