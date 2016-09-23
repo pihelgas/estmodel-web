@@ -161,10 +161,10 @@ public class EstModelResource {
         Year year = Year.of(lake.getYear());
         double flow = lake.getFlow() * year.length() * 86400; // m3/yr
         double volume = lake.getArea() * 1000000 * lake.getDepth(); // m3
-        double retentionTime = flow / volume;
+        double retentionTime = flow / volume; // yr
 
-        double inputConcentration = lake.getLoad() * 1000 / flow;
-        double outputConcentration;
+        double inputConcentration = lake.getLoad() * 1000 / flow; // g/m3 = mg/l
+        double outputConcentration; // g/m3 = mg/l
 
         if ("limnological".equalsIgnoreCase(lake.getType())) {
 
@@ -175,10 +175,15 @@ public class EstModelResource {
 
         } else if ("stratified".equalsIgnoreCase(lake.getType())) {
 
-            double q = lake.getDepth() / retentionTime;
-            double r = 15 / (18 + q);
+            double inputLoad = lake.getLoad() * 1000
+                    / lake.getArea(); // mg/m2/yr
+            
+            double q = lake.getDepth() / retentionTime; // m/yr
+            double r = 15 / (18 + q); // yr/m
 
-            outputConcentration = lake.getLoad() / (q * (1 - r));
+            double outputLoad = lake.getLoad() / (q * (1 - r)); // mg/m2/yr
+            
+            outputConcentration = outputLoad;
 
         } else {
 
