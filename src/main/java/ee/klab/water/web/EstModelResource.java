@@ -159,8 +159,8 @@ public class EstModelResource {
     public EstModel.Lake post(Lake lake) {
 
         Year year = Year.of(lake.getYear());
-        double flow = lake.getFlow() * year.length() * Duration.ofDays(1).getSeconds();
-        double volume = volume(lake.getArea(), lake.getDepth());
+        double flow = lake.getFlow() * year.length() * 86400; // m3/yr
+        double volume = lake.getArea() * 1000000 * lake.getDepth(); // m3
         double retentionTime = flow / volume;
 
         double inputConcentration = lake.getLoad() * 1000 / flow;
