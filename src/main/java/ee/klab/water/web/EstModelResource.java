@@ -181,7 +181,7 @@ public class EstModelResource {
             double q = lake.getDepth() / retentionTime; // m/yr
             double r = 15 / (18 + q); // yr/m
 
-            double outputLoad = lake.getLoad() / (q * (1 - r)); // mg/m2/yr
+            double outputLoad = inputLoad / (q * (1 - r)); // mg/m2/yr
             
             outputConcentration = outputLoad;
 
