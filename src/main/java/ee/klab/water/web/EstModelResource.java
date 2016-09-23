@@ -156,10 +156,11 @@ public class EstModelResource {
     @Produces(MediaType.APPLICATION_JSON)
     public EstModel.Lake post(Lake lake) {
 
+        double flow = lake.getFlow();
         double volume = volume(lake.getArea(), lake.getDepth());
-        double retentionTime = retentionTime(lake.getFlow(), volume);
+        double retentionTime = retentionTime(flow, volume);
 
-        double inputConcentration = lake.getLoad() * 1000 / lake.getFlow();
+        double inputConcentration = lake.getLoad() * 1000 / flow;
         double outputConcentration;
 
         if ("limnological".equalsIgnoreCase(lake.getType())) {
@@ -183,7 +184,7 @@ public class EstModelResource {
 
         }
 
-        double load = outputConcentration * lake.getFlow();
+        double load = outputConcentration * flow;
 
         EstModel.Lake estimation = new EstModel.Lake();
 
