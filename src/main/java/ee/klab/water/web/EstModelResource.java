@@ -185,7 +185,7 @@ public class EstModelResource {
             
             double load = Pepi / 1000000 * lake.getArea(); // kg/a
             
-            outputConcentration = load / flow;
+            outputConcentration = load * 1000 / flow;
 
         } else {
 
