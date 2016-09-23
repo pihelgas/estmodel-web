@@ -178,8 +178,8 @@ public class EstModelResource {
 
         } else {
 
-            outputConcentration = totalPhosphorusConcentration(
-                    inputConcentration, retentionTime);
+            outputConcentration = inputConcentration
+                    / (1 + Math.sqrt(retentionTime));
 
         }
 
