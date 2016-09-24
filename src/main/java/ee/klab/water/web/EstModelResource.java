@@ -152,7 +152,7 @@ public class EstModelResource {
     @Path("/lake")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public EstModel.Lake post(Lake lake) {
+    public EstModel.Lake post(final Lake lake) {
 
         final Year year = Year.of(lake.getYear());
         final double flow = lake.getFlow() * DAYS.toSeconds(year.length()); // m3/yr
@@ -172,7 +172,6 @@ public class EstModelResource {
         } else if ("stratified".equalsIgnoreCase(lake.getType())) {
 
             final double input = lake.getLoad() * 1000000 / lake.getArea(); // mg/m2/yr
-
             final double q = lake.getDepth() / retentionTime; // m/yr
             final double r = 15 / (18 + q); // yr/m
             final double output = input / (q * (1 - r)); // mg/m2/yr
@@ -190,7 +189,7 @@ public class EstModelResource {
         final double load = outputConcentration * flow / 1000; // kg/a
         final double retentionPercentage = (1 - (load / lake.getLoad())) * 100;
 
-        EstModel.Lake estimate = new EstModel.Lake();
+        final EstModel.Lake estimate = new EstModel.Lake();
         estimate.setConcentration(outputConcentration);
         estimate.setLoad(load);
         estimate.setRetentionPercentage(retentionPercentage);
