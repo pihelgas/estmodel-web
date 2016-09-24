@@ -2,9 +2,6 @@ package ee.klab.water.web;
 
 import ee.klab.water.EstModel.Builder;
 import ee.klab.water.EstModel.Parameter;
-import static ee.klab.water.model.Lake.retentionTime;
-import static ee.klab.water.model.Lake.totalPhosphorusConcentration;
-import static ee.klab.water.model.Lake.volume;
 import ee.klab.water.web.model.Catchment;
 import ee.klab.water.web.model.EstModel;
 import ee.klab.water.web.model.EstModel.Discharge;
@@ -13,12 +10,9 @@ import ee.klab.water.web.model.Lake;
 import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.Year;
 import static java.time.temporal.ChronoUnit.SECONDS;
-import java.time.temporal.TemporalField;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 import static java.util.concurrent.TimeUnit.DAYS;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -177,14 +171,13 @@ public class EstModelResource {
 
         } else if ("stratified".equalsIgnoreCase(lake.getType())) {
 
-            double inputLoad = lake.getLoad() * 1000000
-                    / lake.getArea(); // mg/m2/yr
+            final double input = lake.getLoad() * 1000000 / lake.getArea(); // mg/m2/yr
 
-            double q = lake.getDepth() / retentionTime; // m/yr
-            double r = 15 / (18 + q); // yr/m
-            double outputLoad = inputLoad / (q * (1 - r)); // mg/m2/yr
+            final double q = lake.getDepth() / retentionTime; // m/yr
+            final double r = 15 / (18 + q); // yr/m
+            final double output = input / (q * (1 - r)); // mg/m2/yr
 
-            double load = outputLoad / 1000000 * lake.getArea(); // kg/a
+            final double load = output / 1000000 * lake.getArea(); // kg/a
             outputConcentration = load * 1000 / flow;
 
         } else {
@@ -197,12 +190,12 @@ public class EstModelResource {
         final double load = outputConcentration * flow / 1000; // kg/a
         final double retentionPercentage = (1 - (load / lake.getLoad())) * 100;
 
-        EstModel.Lake estimation = new EstModel.Lake();
-        estimation.setConcentration(outputConcentration);
-        estimation.setLoad(load);
-        estimation.setRetentionPercentage(retentionPercentage);
-        estimation.setRetentionTime(retentionTime);
-        return estimation;
+        EstModel.Lake estimate = new EstModel.Lake();
+        estimate.setConcentration(outputConcentration);
+        estimate.setLoad(load);
+        estimate.setRetentionPercentage(retentionPercentage);
+        estimate.setRetentionTime(retentionTime);
+        return estimate;
 
     }
 
