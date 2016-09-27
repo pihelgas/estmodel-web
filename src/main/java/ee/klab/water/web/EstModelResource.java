@@ -32,7 +32,7 @@ public class EstModelResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public EstModel post(Catchment catchment) {
+    public EstModel post(final Catchment catchment) {
 
         return convert(estimate(catchment));
 
@@ -43,6 +43,13 @@ public class EstModelResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public EstModel.Lake post(final Lake lake) {
+
+        if (!Parameter.PHOSPHORUS.toString()
+                .equalsIgnoreCase(lake.getParameter())) {
+
+            throw new WebApplicationException(Response.Status.NOT_IMPLEMENTED);
+
+        }
 
         final Year year = Year.of(lake.getYear());
         final double flow = lake.getFlow() * DAYS.toSeconds(year.length()); // m3/yr
