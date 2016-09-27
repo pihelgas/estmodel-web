@@ -1,6 +1,7 @@
 package ee.klab.water.web;
 
 import ee.klab.water.EstModel.Builder;
+import ee.klab.water.EstModel.Estimation;
 import ee.klab.water.EstModel.Parameter;
 import ee.klab.water.web.model.Catchment;
 import ee.klab.water.web.model.EstModel;
@@ -12,6 +13,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Year;
 import static java.time.temporal.ChronoUnit.SECONDS;
+import java.util.Collection;
 import java.util.Optional;
 import static java.util.concurrent.TimeUnit.DAYS;
 import java.util.stream.Collectors;
@@ -32,119 +34,7 @@ public class EstModelResource {
     @Produces(MediaType.APPLICATION_JSON)
     public EstModel post(Catchment catchment) {
 
-        LocalDate startDate;
-        LocalDate endDate;
-
-        try {
-            startDate = Year
-                    .of(catchment.getYear())
-                    .atMonth(catchment.getMonth())
-                    .atDay(1);
-            endDate = startDate.plusMonths(1);
-        } catch (DateTimeException e) {
-            throw new WebApplicationException(e, Response.Status.BAD_REQUEST);
-        }
-
-        long period = SECONDS
-                .between(startDate.atStartOfDay(), endDate.atStartOfDay());
-
-        Builder builder = new Builder(startDate, endDate)
-                .area(catchment
-                        .getArea())
-                .runoff(catchment
-                        .getRunoff())
-                .forestArea(catchment
-                        .getForestArea())
-                .forestSoil1Percentage(catchment
-                        .getForestSoil1Percentage())
-                .forestSoil2Percentage(catchment
-                        .getForestSoil2Percentage())
-                .felledForestPercentage(catchment
-                        .getFelledForestPercentage())
-                .drainedForestPercentage(catchment
-                        .getDrainedForestPercentage())
-                .fertilizedForestPercentage(catchment
-                        .getFertilizedForestPercentage())
-                .wetLandArea(catchment
-                        .getWetLandArea())
-                .waterSurfaceArea(catchment
-                        .getWaterSurfaceArea())
-                .agriculturalLandArea(catchment
-                        .getAgriculturalLandArea())
-                .wintergreenAgriculturalLandPercentage(catchment
-                        .getWintergreenAgriculturalLandPercentage())
-                .livestock(catchment
-                        .getLivestock())
-                .dairyCows(catchment
-                        .getDairyCows())
-                .dairyUncoupledSepticSystemPercentage(catchment
-                        .getDairyUncoupledSepticSystemPercentage())
-                .dairyInfiltrationSepticSystemPercentage(catchment
-                        .getDairyInfiltrationSepticSystemPercentage())
-                .dairyManureStorageSystemPercentage(catchment
-                        .getDairyManureStorageSystemPercentage())
-                .leakingManureStorageSystemPercentage(catchment
-                        .getLeakingManureStorageSystemPercentage())
-                .individualWastewaterTreatmentPlants(catchment
-                        .getIndividualWastewaterTreatmentPlants())
-                .individualDryToiletSystemPercentage(catchment
-                        .getIndividualDryToiletSystemPercentage())
-                .individualUncoupledSepticSystemPercentage(catchment
-                        .getIndividualUncoupledSepticSystemPercentage())
-                .individualInfilitrationSepticSystemPercentage(catchment
-                        .getIndividualInfilitrationSepticSystemPercentage())
-                .aquacultureProduction(catchment
-                        .getAquacultureProduction())
-                .industryNitrogenDischarge(
-                        load(catchment, period, Parameter.NITROGEN))
-                .industryPhosphorusDischarge(
-                        load(catchment, period, Parameter.PHOSPHORUS));
-
-        double nitrogenRetentionPercentage = 0;
-        double phosphorusRetentionPercentage = 0;
-
-        if (catchment.getAgents() != null) {
-
-            final Optional<Catchment.Discharge> nAgent = catchment.getAgents()
-                    .stream()
-                    .filter(a -> Parameter.NITROGEN.toString()
-                            .equalsIgnoreCase(a.getParameter()))
-                    .findFirst();
-
-            final Optional<Catchment.Discharge> pAgent = catchment.getAgents()
-                    .stream()
-                    .filter(a -> Parameter.PHOSPHORUS.toString()
-                            .equalsIgnoreCase(a.getParameter()))
-                    .findFirst();
-
-            if (nAgent.isPresent()) {
-                Catchment.Discharge agent = nAgent.get();
-                builder = builder
-                        .atmosphericNitrogenSpecificDischarge(agent
-                                .getAtmosphericSpecificDischarge())
-                        .nitrogenRetentionPercentage(agent
-                                .getRetentionPercentage())
-                        .nitrogenAdjustmentCoefficient(agent
-                                .getAdjustmentCoefficient());
-                nitrogenRetentionPercentage = agent.getRetentionPercentage();
-            }
-
-            if (pAgent.isPresent()) {
-                Catchment.Discharge agent = pAgent.get();
-                builder = builder
-                        .atmosphericPhosphorusSpecificDischarge(agent
-                                .getAtmosphericSpecificDischarge())
-                        .phosphorusRetentionPercentage(agent
-                                .getRetentionPercentage())
-                        .phosphorusAdjustmentCoefficient(agent
-                                .getAdjustmentCoefficient());
-                phosphorusRetentionPercentage = agent.getRetentionPercentage();
-            }
-
-        }
-
-        return convert(builder.build(),
-                nitrogenRetentionPercentage, phosphorusRetentionPercentage);
+        return convert(estimate(catchment));
 
     }
 
@@ -198,67 +88,7 @@ public class EstModelResource {
 
     }
 
-    private static EstModel convert(ee.klab.water.EstModel estModel,
-            double nitrogenRetentionPercentage,
-            double phosphorusRetentionPercentage) {
-
-        EstModel adapter = new EstModel();
-
-        adapter.setEstimates(estModel.getEstimations()
-                .stream()
-                .map(e -> {
-                    Discharge estimation = new Discharge();
-                    estimation.setParameter(e.getParameter()
-                            .toString()
-                            .toLowerCase());
-                    estimation.setDetails(e.getDetails()
-                            .stream()
-                            .map(d -> {
-                                SourceDischarge discharge
-                                        = new SourceDischarge();
-
-                                String source = Stream
-                                        .of(d.getSource()
-                                                .toString()
-                                                .split("[^a-zA-Z0-9]"))
-                                        .map(v -> v.substring(0, 1)
-                                                .toUpperCase()
-                                                + v.substring(1)
-                                                .toLowerCase())
-                                        .collect(Collectors.joining());
-                                source = source
-                                        .toLowerCase()
-                                        .substring(0, 1)
-                                        + source.substring(1);
-
-                                discharge.setSource(source);
-                                discharge.setAnthropogenic(d.anthropogenic());
-                                discharge.setAtmospheric(d.atmospheric());
-                                discharge.setNatural(d.natural());
-                                discharge.setTotal(d.total());
-                                return discharge;
-                            })
-                            .collect(Collectors.toList()));
-                    estimation.setAnthropogenic(e.anthropogenic());
-                    estimation.setAtmospheric(e.atmospheric());
-                    estimation.setNatural(e.natural());
-                    estimation.setTotal(e.total());
-                    return estimation;
-                })
-                .collect(Collectors.toList()));
-
-        return adapter;
-
-    }
-
-    /**
-     *
-     * @param catchment
-     * @param parameter
-     * @param period arvutuse ajasamm sekundites
-     * @return
-     */
-    public double load(Catchment catchment, long period, Parameter parameter) {
+    private double load(Catchment catchment, long period, Parameter parameter) {
 
         if (catchment.getPointSources() != null) {
             return catchment.getPointSources().stream().mapToDouble(point
@@ -282,6 +112,173 @@ public class EstModelResource {
         } else {
             return 0;
         }
+
+    }
+
+    public Collection<Estimation> estimate(final Catchment catchment) {
+
+        LocalDate startDate;
+        LocalDate endDate;
+
+        try {
+            startDate = Year
+                    .of(catchment.getYear())
+                    .atMonth(catchment.getMonth())
+                    .atDay(1);
+            endDate = startDate.plusMonths(1);
+        } catch (DateTimeException e) {
+            throw new WebApplicationException(e, Response.Status.BAD_REQUEST);
+        }
+
+        long period = SECONDS
+                .between(startDate.atStartOfDay(), endDate.atStartOfDay());
+
+        final Builder builder = new Builder(startDate, endDate)
+                .area(catchment
+                        .getArea())
+                .runoff(catchment
+                        .getRunoff())
+                .forestArea(catchment
+                        .getForestArea())
+                .forestSoil1Percentage(catchment
+                        .getForestSoil1Percentage())
+                .forestSoil2Percentage(catchment
+                        .getForestSoil2Percentage())
+                .felledForestPercentage(catchment
+                        .getFelledForestPercentage())
+                .drainedForestPercentage(catchment
+                        .getDrainedForestPercentage())
+                .fertilizedForestPercentage(catchment
+                        .getFertilizedForestPercentage())
+                .wetLandArea(catchment
+                        .getWetLandArea())
+                .waterSurfaceArea(catchment
+                        .getWaterSurfaceArea())
+                .agriculturalLandArea(catchment
+                        .getAgriculturalLandArea())
+                .wintergreenAgriculturalLandPercentage(catchment
+                        .getWintergreenAgriculturalLandPercentage())
+                .livestock(catchment
+                        .getLivestock())
+                .dairyCows(catchment
+                        .getDairyCows())
+                .dairyUncoupledSepticSystemPercentage(catchment
+                        .getDairyUncoupledSepticSystemPercentage())
+                .dairyInfiltrationSepticSystemPercentage(catchment
+                        .getDairyInfiltrationSepticSystemPercentage())
+                .dairyManureStorageSystemPercentage(catchment
+                        .getDairyManureStorageSystemPercentage())
+                .leakingManureStorageSystemPercentage(catchment
+                        .getLeakingManureStorageSystemPercentage())
+                .individualWastewaterTreatmentPlants(catchment
+                        .getIndividualWastewaterTreatmentPlants())
+                .individualDryToiletSystemPercentage(catchment
+                        .getIndividualDryToiletSystemPercentage())
+                .individualUncoupledSepticSystemPercentage(catchment
+                        .getIndividualUncoupledSepticSystemPercentage())
+                .individualInfilitrationSepticSystemPercentage(catchment
+                        .getIndividualInfilitrationSepticSystemPercentage())
+                .aquacultureProduction(catchment
+                        .getAquacultureProduction())
+                .industryNitrogenDischarge(
+                        load(catchment, period, Parameter.NITROGEN))
+                .industryPhosphorusDischarge(
+                        load(catchment, period, Parameter.PHOSPHORUS));
+
+        if (catchment.getAgents() != null) {
+
+            final Optional<Catchment.Discharge> nAgent = catchment.getAgents()
+                    .stream()
+                    .filter(a -> Parameter.NITROGEN.toString()
+                            .equalsIgnoreCase(a.getParameter()))
+                    .findFirst();
+
+            final Optional<Catchment.Discharge> pAgent = catchment.getAgents()
+                    .stream()
+                    .filter(a -> Parameter.PHOSPHORUS.toString()
+                            .equalsIgnoreCase(a.getParameter()))
+                    .findFirst();
+
+            catchment.getAgents()
+                    .stream()
+                    .filter(a -> Parameter.PHOSPHORUS.toString()
+                            .equalsIgnoreCase(a.getParameter()))
+                    .findFirst()
+                    .ifPresent(agent -> builder
+                            .atmosphericNitrogenSpecificDischarge(agent
+                                    .getAtmosphericSpecificDischarge())
+                            .nitrogenRetentionPercentage(agent
+                                    .getRetentionPercentage())
+                            .nitrogenAdjustmentCoefficient(agent
+                                    .getAdjustmentCoefficient()));
+
+            catchment.getAgents()
+                    .stream()
+                    .filter(agent -> Parameter.PHOSPHORUS.toString()
+                            .equalsIgnoreCase(agent.getParameter()))
+                    .findFirst()
+                    .ifPresent(agent -> builder
+                            .atmosphericPhosphorusSpecificDischarge(agent
+                                    .getAtmosphericSpecificDischarge())
+                            .phosphorusRetentionPercentage(agent
+                                    .getRetentionPercentage())
+                            .phosphorusAdjustmentCoefficient(agent
+                                    .getAdjustmentCoefficient()));
+
+        }
+
+        return builder.build().getEstimations();
+
+    }
+
+    protected static EstModel convert(
+            Collection<? extends ee.klab.water.EstModel.Estimation> estimates) {
+
+        EstModel adapter = new EstModel();
+
+        estimates
+                .stream()
+                .map(e -> {
+                    Discharge estimation = new Discharge();
+                    estimation.setParameter(e.getParameter()
+                            .toString()
+                            .toLowerCase());
+                    estimation.setDetails(e.getDetails()
+                            .stream()
+                            .map(d -> {
+                                SourceDischarge discharge
+                                        = new SourceDischarge();
+                                discharge.setSource(convert(d.getSource()
+                                        .toString()));
+                                discharge.setAnthropogenic(d.anthropogenic());
+                                discharge.setAtmospheric(d.atmospheric());
+                                discharge.setNatural(d.natural());
+                                discharge.setTotal(d.total());
+                                return discharge;
+                            })
+                            .collect(Collectors.toList()));
+                    estimation.setAnthropogenic(e.anthropogenic());
+                    estimation.setAtmospheric(e.atmospheric());
+                    estimation.setNatural(e.natural());
+                    estimation.setTotal(e.total());
+                    return estimation;
+                })
+                .collect(Collectors.toList());
+
+        return adapter;
+
+    }
+
+    private static String convert(String string) {
+
+        String upperCamelCase = Stream
+                .of(string.split("[^a-zA-Z0-9]"))
+                .map(v -> v.substring(0, 1).toUpperCase()
+                        + v.substring(1).toLowerCase())
+                .collect(Collectors.joining());
+
+        return upperCamelCase.toLowerCase().substring(0, 1)
+                + upperCamelCase.substring(1);
 
     }
 
