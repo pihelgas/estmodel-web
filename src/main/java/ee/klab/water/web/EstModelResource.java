@@ -5,7 +5,6 @@ import ee.klab.water.EstModel.Estimation;
 import ee.klab.water.EstModel.Parameter;
 import ee.klab.water.web.model.Catchment;
 import ee.klab.water.web.model.EstModel;
-import ee.klab.water.web.model.Lake;
 import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -39,38 +38,38 @@ public class EstModelResource {
     @Path("/lake")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public EstModel.Lake.Estimate post(final Lake lake) {
+    public EstModel.Lake.Estimate post(final EstModel.Lake model) {
 
         if (!Parameter.PHOSPHORUS.toString()
-                .equalsIgnoreCase(lake.getParameter())) {
+                .equalsIgnoreCase(model.getParameter())) {
 
             throw new WebApplicationException(Response.Status.NOT_IMPLEMENTED);
 
         }
 
-        final Year year = Year.of(lake.getYear());
-        final double flow = lake.getFlow() * DAYS.toSeconds(year.length()); // m3/yr
-        final double volume = lake.getArea() * 1000000 * lake.getDepth(); // m3
+        final Year year = Year.of(model.getYear());
+        final double flow = model.getFlow() * DAYS.toSeconds(year.length()); // m3/yr
+        final double volume = model.getArea() * 1000000 * model.getDepth(); // m3
         final double retentionTime = flow / volume; // yr
-        final double inputConcentration = lake.getLoad() * 1000 / flow; // g/m3 = mg/l
+        final double inputConcentration = model.getLoad() * 1000 / flow; // g/m3 = mg/l
 
         double outputConcentration; // g/m3 = mg/l
 
-        if ("limnological".equalsIgnoreCase(lake.getType())) {
+        if ("limnological".equalsIgnoreCase(model.getType())) {
 
-            outputConcentration = lake.getA()
+            outputConcentration = model.getA()
                     * Math.pow((inputConcentration / 1000)
-                            / (1 + Math.sqrt(retentionTime)), lake.getB())
+                            / (1 + Math.sqrt(retentionTime)), model.getB())
                     * 1000;
 
-        } else if ("stratified".equalsIgnoreCase(lake.getType())) {
+        } else if ("stratified".equalsIgnoreCase(model.getType())) {
 
-            final double input = lake.getLoad() * 1000000 / lake.getArea(); // mg/m2/yr
-            final double q = lake.getDepth() / retentionTime; // m/yr
+            final double input = model.getLoad() * 1000000 / model.getArea(); // mg/m2/yr
+            final double q = model.getDepth() / retentionTime; // m/yr
             final double r = 15 / (18 + q); // yr/m
             final double output = input / (q * (1 - r)); // mg/m2/yr
 
-            final double load = output / 1000000 * lake.getArea(); // kg/a
+            final double load = output / 1000000 * model.getArea(); // kg/a
             outputConcentration = load * 1000 / flow;
 
         } else {
@@ -81,7 +80,7 @@ public class EstModelResource {
         }
 
         final double load = outputConcentration * flow / 1000; // kg/a
-        final double retentionPercentage = (1 - (load / lake.getLoad())) * 100;
+        final double retentionPercentage = (1 - (load / model.getLoad())) * 100;
 
         final EstModel.Lake.Estimate estimate = new EstModel.Lake.Estimate();
         estimate.setConcentration(outputConcentration);
