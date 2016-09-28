@@ -43,7 +43,7 @@ public class EstModelResource {
         if (!Parameter.PHOSPHORUS.toString()
                 .equalsIgnoreCase(model.getParameter())) {
 
-            throw new WebApplicationException(Response.Status.NOT_IMPLEMENTED);
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
 
         }
 
