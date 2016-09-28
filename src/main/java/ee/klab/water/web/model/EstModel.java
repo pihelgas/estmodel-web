@@ -8,30 +8,16 @@ import java.util.Collection;
  */
 public class EstModel implements Serializable {
 
-    private Collection<Discharge> estimates;
-
-    public EstModel() {
-
-    }
-
-    public Collection<Discharge> getEstimates() {
-        return estimates;
-    }
-
-    public void setEstimates(Collection<Discharge> estimates) {
-        this.estimates = estimates;
-    }
-
-    public static class Discharge implements Serializable {
+    public static class Estimate implements Serializable {
 
         private String parameter;
-        private Collection<SourceDischarge> details;
-        private double anthropogenic;
-        private double atmospheric;
-        private double natural;
-        private double total;
+        private Collection<SourceEstimate> sources;
+        private double anthropogenicDischarge;
+        private double atmosphericDischarge;
+        private double naturalDischarge;
+        private double totalDischarge;
 
-        public Discharge() {
+        public Estimate() {
 
         }
 
@@ -43,55 +29,55 @@ public class EstModel implements Serializable {
             this.parameter = parameter;
         }
 
-        public Collection<SourceDischarge> getDetails() {
-            return this.details;
+        public Collection<SourceEstimate> getSources() {
+            return this.sources;
         }
 
-        public void setDetails(final Collection<SourceDischarge> details) {
-            this.details = details;
+        public void setSources(final Collection<SourceEstimate> sources) {
+            this.sources = sources;
         }
 
-        public double getAnthropogenic() {
-            return this.anthropogenic;
+        public double getAnthropogenicDischarge() {
+            return this.anthropogenicDischarge;
         }
 
-        public void setAnthropogenic(double anthropogenic) {
-            this.anthropogenic = anthropogenic;
+        public void setAnthropogenicDischarge(double anthropogenicDischarge) {
+            this.anthropogenicDischarge = anthropogenicDischarge;
         }
 
-        public double getAtmospheric() {
-            return this.atmospheric;
+        public double getAtmosphericDischarge() {
+            return this.atmosphericDischarge;
         }
 
-        public void setAtmospheric(double atmospheric) {
-            this.atmospheric = atmospheric;
+        public void setAtmosphericDischarge(double atmosphericDischarge) {
+            this.atmosphericDischarge = atmosphericDischarge;
         }
 
-        public double getNatural() {
-            return this.natural;
+        public double getNaturalDischarge() {
+            return this.naturalDischarge;
         }
 
-        public void setNatural(double natural) {
-            this.natural = natural;
+        public void setNaturalDischarge(double naturalDischarge) {
+            this.naturalDischarge = naturalDischarge;
         }
 
-        public double getTotal() {
-            return this.total;
+        public double getTotalDischarge() {
+            return this.totalDischarge;
         }
 
-        public void setTotal(double total) {
-            this.total = total;
+        public void setTotalDischarge(double totalDischarge) {
+            this.totalDischarge = totalDischarge;
         }
 
-        public static class SourceDischarge implements Serializable {
+        public static class SourceEstimate implements Serializable {
 
             private String source;
-            private double anthropogenic;
-            private double atmospheric;
-            private double natural;
-            private double total;
+            private double anthropogenicDischarge;
+            private double atmosphericDischarge;
+            private double naturalDischarge;
+            private double totalDischarge;
 
-            public SourceDischarge() {
+            public SourceEstimate() {
 
             }
 
@@ -103,36 +89,36 @@ public class EstModel implements Serializable {
                 this.source = source;
             }
 
-            public double getAnthropogenic() {
-                return this.anthropogenic;
+            public double getAnthropogenicDischarge() {
+                return this.anthropogenicDischarge;
             }
 
-            public void setAnthropogenic(double anthropogenic) {
-                this.anthropogenic = anthropogenic;
+            public void setAnthropogenicDischarge(double anthropogenicDischarge) {
+                this.anthropogenicDischarge = anthropogenicDischarge;
             }
 
-            public double getAtmospheric() {
-                return this.atmospheric;
+            public double getAtmosphericDischarge() {
+                return this.atmosphericDischarge;
             }
 
-            public void setAtmospheric(double atmospheric) {
-                this.atmospheric = atmospheric;
+            public void setAtmosphericDischarge(double atmosphericDischarge) {
+                this.atmosphericDischarge = atmosphericDischarge;
             }
 
-            public double getNatural() {
-                return this.natural;
+            public double getNaturalDischarge() {
+                return this.naturalDischarge;
             }
 
-            public void setNatural(double natural) {
-                this.natural = natural;
+            public void setNaturalDischarge(double naturalDischarge) {
+                this.naturalDischarge = naturalDischarge;
             }
 
-            public double getTotal() {
-                return this.total;
+            public double getTotalDischarge() {
+                return this.totalDischarge;
             }
 
-            public void setTotal(double total) {
-                this.total = total;
+            public void setTotalDischarge(double totalDischarge) {
+                this.totalDischarge = totalDischarge;
             }
 
         }
@@ -141,45 +127,48 @@ public class EstModel implements Serializable {
 
     public static class Lake implements Serializable {
 
-        private double concentration;
-        private double load;
-        private double retentionPercentage;
-        private double retentionTime;
+        public static class Estimate implements Serializable {
 
-        public Lake() {
+            private double concentration;
+            private double load;
+            private double retentionPercentage;
+            private double retentionTime;
 
-        }
+            public Estimate() {
 
-        public double getConcentration() {
-            return this.concentration;
-        }
+            }
 
-        public void setConcentration(double concentration) {
-            this.concentration = concentration;
-        }
+            public double getConcentration() {
+                return this.concentration;
+            }
 
-        public double getLoad() {
-            return this.load;
-        }
+            public void setConcentration(double concentration) {
+                this.concentration = concentration;
+            }
 
-        public void setLoad(double load) {
-            this.load = load;
-        }
+            public double getLoad() {
+                return this.load;
+            }
 
-        public double getRetentionPercentage() {
-            return this.retentionPercentage;
-        }
+            public void setLoad(double load) {
+                this.load = load;
+            }
 
-        public void setRetentionPercentage(double retentionPercentage) {
-            this.retentionPercentage = retentionPercentage;
-        }
+            public double getRetentionPercentage() {
+                return this.retentionPercentage;
+            }
 
-        public double getRetentionTime() {
-            return this.retentionTime;
-        }
+            public void setRetentionPercentage(double retentionPercentage) {
+                this.retentionPercentage = retentionPercentage;
+            }
 
-        public void setRetentionTime(double retentionTime) {
-            this.retentionTime = retentionTime;
+            public double getRetentionTime() {
+                return this.retentionTime;
+            }
+
+            public void setRetentionTime(double retentionTime) {
+                this.retentionTime = retentionTime;
+            }
         }
 
     }

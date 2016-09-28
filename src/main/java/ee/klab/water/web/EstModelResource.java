@@ -5,8 +5,7 @@ import ee.klab.water.EstModel.Estimation;
 import ee.klab.water.EstModel.Parameter;
 import ee.klab.water.web.model.Catchment;
 import ee.klab.water.web.model.EstModel;
-import ee.klab.water.web.model.EstModel.Discharge;
-import ee.klab.water.web.model.EstModel.Discharge.SourceDischarge;
+import ee.klab.water.web.model.EstModel.Estimate.SourceEstimate;
 import ee.klab.water.web.model.Lake;
 import java.time.DateTimeException;
 import java.time.Duration;
@@ -14,7 +13,6 @@ import java.time.LocalDate;
 import java.time.Year;
 import static java.time.temporal.ChronoUnit.SECONDS;
 import java.util.Collection;
-import java.util.Optional;
 import static java.util.concurrent.TimeUnit.DAYS;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,7 +30,7 @@ public class EstModelResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public EstModel post(final Catchment catchment) {
+    public Collection<EstModel.Estimate> post(final Catchment catchment) {
 
         return convert(estimate(catchment));
 
@@ -42,7 +40,7 @@ public class EstModelResource {
     @Path("/lake")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public EstModel.Lake post(final Lake lake) {
+    public EstModel.Lake.Estimate post(final Lake lake) {
 
         if (!Parameter.PHOSPHORUS.toString()
                 .equalsIgnoreCase(lake.getParameter())) {
@@ -86,7 +84,7 @@ public class EstModelResource {
         final double load = outputConcentration * flow / 1000; // kg/a
         final double retentionPercentage = (1 - (load / lake.getLoad())) * 100;
 
-        final EstModel.Lake estimate = new EstModel.Lake();
+        final EstModel.Lake.Estimate estimate = new EstModel.Lake.Estimate();
         estimate.setConcentration(outputConcentration);
         estimate.setLoad(load);
         estimate.setRetentionPercentage(retentionPercentage);
@@ -98,24 +96,24 @@ public class EstModelResource {
     private double load(Catchment catchment, long period, Parameter parameter) {
 
         if (catchment.getPointSources() != null) {
-            return catchment.getPointSources().stream().mapToDouble(point
-                    -> point.getMeasurements()
-                    .stream()
-                    .filter(agent -> parameter.name()
-                            .equalsIgnoreCase(agent.getParameter()))
-                    .mapToDouble(agent -> {
+            return catchment.getPointSources().stream()
+                    .mapToDouble(point -> point.getMeasurements()
+                            .stream()
+                            .filter(agent -> parameter.name()
+                                    .equalsIgnoreCase(agent.getParameter()))
+                            .mapToDouble(agent -> {
 
-                        double time = point.getDistance() * 1000 / catchment.getStreamVelocity() / Duration.ofDays(1).getSeconds(); // aeg punktallikast vaadeldava kohani ööpäevades
+                                double time = point.getDistance() * 1000 / catchment.getStreamVelocity() / Duration.ofDays(1).getSeconds(); // aeg punktallikast vaadeldava kohani ööpäevades
 
-                        double retention = agent.getMaxRetentionPercentage() * time / (agent.getHalfRetentionTime() + time);
+                                double retention = agent.getMaxRetentionPercentage() * time / (agent.getHalfRetentionTime() + time);
 
-                        double load = point.getFlow() * agent.getConcentration() * period / 1000; //punktallikast tulev koormus perioodil kilogrammides
+                                double load = point.getFlow() * agent.getConcentration() * period / 1000; //punktallikast tulev koormus perioodil kilogrammides
 
-                        return load - (load * retention / 100);
+                                return load - (load * retention / 100);
 
-                    })
-                    .sum()
-            ).sum();
+                            })
+                            .sum()
+                    ).sum();
         } else {
             return 0;
         }
@@ -194,22 +192,10 @@ public class EstModelResource {
 
         if (catchment.getAgents() != null) {
 
-            final Optional<Catchment.Discharge> nAgent = catchment.getAgents()
-                    .stream()
-                    .filter(a -> Parameter.NITROGEN.toString()
-                            .equalsIgnoreCase(a.getParameter()))
-                    .findFirst();
-
-            final Optional<Catchment.Discharge> pAgent = catchment.getAgents()
-                    .stream()
-                    .filter(a -> Parameter.PHOSPHORUS.toString()
-                            .equalsIgnoreCase(a.getParameter()))
-                    .findFirst();
-
             catchment.getAgents()
                     .stream()
-                    .filter(a -> Parameter.PHOSPHORUS.toString()
-                            .equalsIgnoreCase(a.getParameter()))
+                    .filter(agent -> Parameter.NITROGEN.toString()
+                            .equalsIgnoreCase(agent.getParameter()))
                     .findFirst()
                     .ifPresent(agent -> builder
                             .atmosphericNitrogenSpecificDischarge(agent
@@ -238,41 +224,37 @@ public class EstModelResource {
 
     }
 
-    protected static EstModel convert(
+    protected static Collection<EstModel.Estimate> convert(
             Collection<? extends ee.klab.water.EstModel.Estimation> estimates) {
 
-        EstModel adapter = new EstModel();
-
-        estimates
+        return estimates
                 .stream()
-                .map(e -> {
-                    Discharge estimation = new Discharge();
-                    estimation.setParameter(e.getParameter()
+                .map(d -> {
+                    EstModel.Estimate estimate = new EstModel.Estimate();
+                    estimate.setParameter(d.getParameter()
                             .toString()
                             .toLowerCase());
-                    estimation.setDetails(e.getDetails()
+                    estimate.setSources(d.getDetails()
                             .stream()
-                            .map(d -> {
-                                SourceDischarge discharge
-                                        = new SourceDischarge();
-                                discharge.setSource(convert(d.getSource()
+                            .map(s -> {
+                                SourceEstimate se
+                                        = new SourceEstimate();
+                                se.setSource(convert(s.getSource()
                                         .toString()));
-                                discharge.setAnthropogenic(d.anthropogenic());
-                                discharge.setAtmospheric(d.atmospheric());
-                                discharge.setNatural(d.natural());
-                                discharge.setTotal(d.total());
-                                return discharge;
+                                se.setAnthropogenicDischarge(s.anthropogenic());
+                                se.setAtmosphericDischarge(s.atmospheric());
+                                se.setNaturalDischarge(s.natural());
+                                se.setTotalDischarge(s.total());
+                                return se;
                             })
                             .collect(Collectors.toList()));
-                    estimation.setAnthropogenic(e.anthropogenic());
-                    estimation.setAtmospheric(e.atmospheric());
-                    estimation.setNatural(e.natural());
-                    estimation.setTotal(e.total());
-                    return estimation;
+                    estimate.setAnthropogenicDischarge(d.anthropogenic());
+                    estimate.setAtmosphericDischarge(d.atmospheric());
+                    estimate.setNaturalDischarge(d.natural());
+                    estimate.setTotalDischarge(d.total());
+                    return estimate;
                 })
                 .collect(Collectors.toList());
-
-        return adapter;
 
     }
 
