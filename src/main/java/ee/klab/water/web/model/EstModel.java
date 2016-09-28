@@ -73,7 +73,7 @@ public class EstModel implements Serializable {
 
     public static class SourceEstimate implements Serializable {
 
-        private String source;
+        private String id;
         private double anthropogenicDischarge;
         private double atmosphericDischarge;
         private double naturalDischarge;
@@ -83,12 +83,12 @@ public class EstModel implements Serializable {
 
         }
 
-        public String getSource() {
-            return this.source;
+        public String getId() {
+            return this.id;
         }
 
-        public void setSource(String source) {
-            this.source = source;
+        public void setId(String id) {
+            this.id = id;
         }
 
         public double getAnthropogenicDischarge() {

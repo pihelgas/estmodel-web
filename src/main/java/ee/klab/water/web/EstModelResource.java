@@ -238,7 +238,7 @@ public class EstModelResource {
                             .map(s -> {
                                 EstModel.SourceEstimate se
                                         = new EstModel.SourceEstimate();
-                                se.setSource(convert(s.getSource()
+                                se.setId(convert(s.getSource()
                                         .toString()));
                                 se.setAnthropogenicDischarge(s.anthropogenic());
                                 se.setAtmosphericDischarge(s.atmospheric());
