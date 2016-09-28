@@ -69,58 +69,58 @@ public class EstModel implements Serializable {
             this.totalDischarge = totalDischarge;
         }
 
-        public static class SourceEstimate implements Serializable {
+    }
 
-            private String source;
-            private double anthropogenicDischarge;
-            private double atmosphericDischarge;
-            private double naturalDischarge;
-            private double totalDischarge;
+    public static class SourceEstimate implements Serializable {
 
-            public SourceEstimate() {
+        private String source;
+        private double anthropogenicDischarge;
+        private double atmosphericDischarge;
+        private double naturalDischarge;
+        private double totalDischarge;
 
-            }
+        public SourceEstimate() {
 
-            public String getSource() {
-                return this.source;
-            }
+        }
 
-            public void setSource(String source) {
-                this.source = source;
-            }
+        public String getSource() {
+            return this.source;
+        }
 
-            public double getAnthropogenicDischarge() {
-                return this.anthropogenicDischarge;
-            }
+        public void setSource(String source) {
+            this.source = source;
+        }
 
-            public void setAnthropogenicDischarge(double anthropogenicDischarge) {
-                this.anthropogenicDischarge = anthropogenicDischarge;
-            }
+        public double getAnthropogenicDischarge() {
+            return this.anthropogenicDischarge;
+        }
 
-            public double getAtmosphericDischarge() {
-                return this.atmosphericDischarge;
-            }
+        public void setAnthropogenicDischarge(double anthropogenicDischarge) {
+            this.anthropogenicDischarge = anthropogenicDischarge;
+        }
 
-            public void setAtmosphericDischarge(double atmosphericDischarge) {
-                this.atmosphericDischarge = atmosphericDischarge;
-            }
+        public double getAtmosphericDischarge() {
+            return this.atmosphericDischarge;
+        }
 
-            public double getNaturalDischarge() {
-                return this.naturalDischarge;
-            }
+        public void setAtmosphericDischarge(double atmosphericDischarge) {
+            this.atmosphericDischarge = atmosphericDischarge;
+        }
 
-            public void setNaturalDischarge(double naturalDischarge) {
-                this.naturalDischarge = naturalDischarge;
-            }
+        public double getNaturalDischarge() {
+            return this.naturalDischarge;
+        }
 
-            public double getTotalDischarge() {
-                return this.totalDischarge;
-            }
+        public void setNaturalDischarge(double naturalDischarge) {
+            this.naturalDischarge = naturalDischarge;
+        }
 
-            public void setTotalDischarge(double totalDischarge) {
-                this.totalDischarge = totalDischarge;
-            }
+        public double getTotalDischarge() {
+            return this.totalDischarge;
+        }
 
+        public void setTotalDischarge(double totalDischarge) {
+            this.totalDischarge = totalDischarge;
         }
 
     }

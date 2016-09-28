@@ -5,7 +5,6 @@ import ee.klab.water.EstModel.Estimation;
 import ee.klab.water.EstModel.Parameter;
 import ee.klab.water.web.model.Catchment;
 import ee.klab.water.web.model.EstModel;
-import ee.klab.water.web.model.EstModel.Estimate.SourceEstimate;
 import ee.klab.water.web.model.Lake;
 import java.time.DateTimeException;
 import java.time.Duration;
@@ -237,8 +236,8 @@ public class EstModelResource {
                     estimate.setSources(d.getDetails()
                             .stream()
                             .map(s -> {
-                                SourceEstimate se
-                                        = new SourceEstimate();
+                                EstModel.SourceEstimate se
+                                        = new EstModel.SourceEstimate();
                                 se.setSource(convert(s.getSource()
                                         .toString()));
                                 se.setAnthropogenicDischarge(s.anthropogenic());
