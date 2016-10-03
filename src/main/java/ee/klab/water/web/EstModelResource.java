@@ -3,10 +3,8 @@ package ee.klab.water.web;
 import ee.klab.water.EstModel.Builder;
 import ee.klab.water.EstModel.Estimation;
 import ee.klab.water.EstModel.Parameter;
-import ee.klab.water.web.model.Catchment;
 import ee.klab.water.web.model.EstModel;
 import java.time.DateTimeException;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Year;
 import static java.time.temporal.ChronoUnit.SECONDS;
@@ -28,9 +26,9 @@ public class EstModelResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Collection<EstModel.Estimate> post(final Catchment catchment) {
+    public Collection<EstModel.Estimate> post(final EstModel model) {
 
-        return convert(estimate(catchment));
+        return convert(estimate(model));
 
     }
 
@@ -91,44 +89,40 @@ public class EstModelResource {
 
     }
 
-    private double load(Catchment catchment, long period, Parameter parameter) {
-
-        if (catchment.getPointSources() != null) {
-            return catchment.getPointSources().stream()
-                    .mapToDouble(point -> point.getMeasurements()
-                            .stream()
-                            .filter(agent -> parameter.name()
-                                    .equalsIgnoreCase(agent.getParameter()))
-                            .mapToDouble(agent -> {
-
-                                double time = point.getDistance() * 1000 / catchment.getStreamVelocity() / Duration.ofDays(1).getSeconds(); // aeg punktallikast vaadeldava kohani ööpäevades
-
-                                double retention = agent.getMaxRetentionPercentage() * time / (agent.getHalfRetentionTime() + time);
-
-                                double load = point.getFlow() * agent.getConcentration() * period / 1000; //punktallikast tulev koormus perioodil kilogrammides
-
-                                return load - (load * retention / 100);
-
-                            })
-                            .sum()
-                    ).sum();
-        } else {
-            return 0;
-        }
-
-    }
-
-    public Collection<Estimation> estimate(final Catchment catchment) {
+//    private double load(Catchment catchment, long period, Parameter parameter) {
+//
+//        if (catchment.getPointSources() != null) {
+//            return catchment.getPointSources().stream()
+//                    .mapToDouble(point -> point.getMeasurements()
+//                            .stream()
+//                            .filter(agent -> parameter.name()
+//                                    .equalsIgnoreCase(agent.getParameter()))
+//                            .mapToDouble(agent -> {
+//
+//                                double time = point.getDistance() * 1000 / catchment.getStreamVelocity() / Duration.ofDays(1).getSeconds(); // aeg punktallikast vaadeldava kohani ööpäevades
+//
+//                                double retention = agent.getMaxRetentionPercentage() * time / (agent.getHalfRetentionTime() + time);
+//
+//                                double load = point.getFlow() * agent.getConcentration() * period / 1000; //punktallikast tulev koormus perioodil kilogrammides
+//
+//                                return load - (load * retention / 100);
+//
+//                            })
+//                            .sum()
+//                    ).sum();
+//        } else {
+//            return 0;
+//        }
+//
+//    }
+    public Collection<Estimation> estimate(final EstModel model) {
 
         LocalDate startDate;
         LocalDate endDate;
 
         try {
-            startDate = Year
-                    .of(catchment.getYear())
-                    .atMonth(catchment.getMonth())
-                    .atDay(1);
-            endDate = startDate.plusMonths(1);
+            startDate = Year.of(model.getYear()).atDay(1);
+            endDate = startDate.plusYears(1);
         } catch (DateTimeException e) {
             throw new WebApplicationException(e, Response.Status.BAD_REQUEST);
         }
@@ -137,86 +131,84 @@ public class EstModelResource {
                 .between(startDate.atStartOfDay(), endDate.atStartOfDay());
 
         final Builder builder = new Builder(startDate, endDate)
-                .area(catchment
+                .area(model
                         .getArea())
-                .runoff(catchment
-                        .getRunoff())
-                .forestArea(catchment
+                .forestArea(model
                         .getForestArea())
-                .forestSoil1Percentage(catchment
+                .forestSoil1Percentage(model
                         .getForestSoil1Percentage())
-                .forestSoil2Percentage(catchment
+                .forestSoil2Percentage(model
                         .getForestSoil2Percentage())
-                .felledForestPercentage(catchment
+                .felledForestPercentage(model
                         .getFelledForestPercentage())
-                .drainedForestPercentage(catchment
+                .drainedForestPercentage(model
                         .getDrainedForestPercentage())
-                .fertilizedForestPercentage(catchment
+                .fertilizedForestPercentage(model
                         .getFertilizedForestPercentage())
-                .wetLandArea(catchment
+                .wetLandArea(model
                         .getWetLandArea())
-                .waterSurfaceArea(catchment
+                .waterSurfaceArea(model
                         .getWaterSurfaceArea())
-                .agriculturalLandArea(catchment
+                .agriculturalLandArea(model
                         .getAgriculturalLandArea())
-                .wintergreenAgriculturalLandPercentage(catchment
+                .wintergreenAgriculturalLandPercentage(model
                         .getWintergreenAgriculturalLandPercentage())
-                .livestock(catchment
+                .livestock(model
                         .getLivestock())
-                .dairyCows(catchment
+                .dairyCows(model
                         .getDairyCows())
-                .dairyUncoupledSepticSystemPercentage(catchment
+                .dairyUncoupledSepticSystemPercentage(model
                         .getDairyUncoupledSepticSystemPercentage())
-                .dairyInfiltrationSepticSystemPercentage(catchment
+                .dairyInfiltrationSepticSystemPercentage(model
                         .getDairyInfiltrationSepticSystemPercentage())
-                .dairyManureStorageSystemPercentage(catchment
+                .dairyManureStorageSystemPercentage(model
                         .getDairyManureStorageSystemPercentage())
-                .leakingManureStorageSystemPercentage(catchment
+                .leakingManureStorageSystemPercentage(model
                         .getLeakingManureStorageSystemPercentage())
-                .individualWastewaterTreatmentPlants(catchment
+                .individualWastewaterTreatmentPlants(model
                         .getIndividualWastewaterTreatmentPlants())
-                .individualDryToiletSystemPercentage(catchment
+                .individualDryToiletSystemPercentage(model
                         .getIndividualDryToiletSystemPercentage())
-                .individualUncoupledSepticSystemPercentage(catchment
+                .individualUncoupledSepticSystemPercentage(model
                         .getIndividualUncoupledSepticSystemPercentage())
-                .individualInfilitrationSepticSystemPercentage(catchment
+                .individualInfilitrationSepticSystemPercentage(model
                         .getIndividualInfilitrationSepticSystemPercentage())
-                .aquacultureProduction(catchment
-                        .getAquacultureProduction())
-                .industryNitrogenDischarge(
-                        load(catchment, period, Parameter.NITROGEN))
-                .industryPhosphorusDischarge(
-                        load(catchment, period, Parameter.PHOSPHORUS));
-
-        if (catchment.getAgents() != null) {
-
-            catchment.getAgents()
-                    .stream()
-                    .filter(agent -> Parameter.NITROGEN.toString()
-                            .equalsIgnoreCase(agent.getParameter()))
-                    .findFirst()
-                    .ifPresent(agent -> builder
-                            .atmosphericNitrogenSpecificDischarge(agent
-                                    .getAtmosphericSpecificDischarge())
-                            .nitrogenRetentionPercentage(agent
-                                    .getRetentionPercentage())
-                            .nitrogenAdjustmentCoefficient(agent
-                                    .getAdjustmentCoefficient()));
-
-            catchment.getAgents()
-                    .stream()
-                    .filter(agent -> Parameter.PHOSPHORUS.toString()
-                            .equalsIgnoreCase(agent.getParameter()))
-                    .findFirst()
-                    .ifPresent(agent -> builder
-                            .atmosphericPhosphorusSpecificDischarge(agent
-                                    .getAtmosphericSpecificDischarge())
-                            .phosphorusRetentionPercentage(agent
-                                    .getRetentionPercentage())
-                            .phosphorusAdjustmentCoefficient(agent
-                                    .getAdjustmentCoefficient()));
-
-        }
+                .aquacultureProduction(model
+                        .getAquacultureProduction());
+//                .industryNitrogenDischarge(
+//                        load(model, period, Parameter.NITROGEN))
+//                .industryPhosphorusDischarge(
+//                        load(model, period, Parameter.PHOSPHORUS));
+//
+//        if (model.getAgents() != null) {
+//
+//            model.getAgents()
+//                    .stream()
+//                    .filter(agent -> Parameter.NITROGEN.toString()
+//                            .equalsIgnoreCase(agent.getParameter()))
+//                    .findFirst()
+//                    .ifPresent(agent -> builder
+//                            .atmosphericNitrogenSpecificDischarge(agent
+//                                    .getAtmosphericSpecificDischarge())
+//                            .nitrogenRetentionPercentage(agent
+//                                    .getRetentionPercentage())
+//                            .nitrogenAdjustmentCoefficient(agent
+//                                    .getAdjustmentCoefficient()));
+//
+//            model.getAgents()
+//                    .stream()
+//                    .filter(agent -> Parameter.PHOSPHORUS.toString()
+//                            .equalsIgnoreCase(agent.getParameter()))
+//                    .findFirst()
+//                    .ifPresent(agent -> builder
+//                            .atmosphericPhosphorusSpecificDischarge(agent
+//                                    .getAtmosphericSpecificDischarge())
+//                            .phosphorusRetentionPercentage(agent
+//                                    .getRetentionPercentage())
+//                            .phosphorusAdjustmentCoefficient(agent
+//                                    .getAdjustmentCoefficient()));
+//
+//        }
 
         return builder.build().getEstimations();
 

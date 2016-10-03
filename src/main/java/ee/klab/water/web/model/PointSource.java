@@ -3,13 +3,9 @@ package ee.klab.water.web.model;
 import java.io.Serializable;
 import java.util.Collection;
 
-/**
- * PointSource input for EstModel
- */
 public class PointSource implements Serializable {
 
     private double distance;
-    private double flow;
     private Collection<Measurement> measurements;
     private String type;
 
@@ -33,22 +29,6 @@ public class PointSource implements Serializable {
         this.distance = distance;
     }
 
-    /**
-     *
-     * @return flow (m3/s)
-     */
-    public double getFlow() {
-        return this.flow;
-    }
-
-    /**
-     *
-     * @param flow flow (m3/s)
-     */
-    public void setFlow(double flow) {
-        this.flow = flow;
-    }
-
     public Collection<Measurement> getMeasurements() {
         return this.measurements;
     }
@@ -63,59 +43,6 @@ public class PointSource implements Serializable {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public static class Measurement implements Serializable {
-
-        private double concentration;
-        private double halfRetentionTime;
-        private double maxRetentionPercentage;
-        private String parameter;
-
-        public Measurement() {
-
-        }
-
-        public double getConcentration() {
-            return this.concentration;
-        }
-
-        public void setConcentration(double concentration) {
-            this.concentration = concentration;
-        }
-
-        /**
-         *
-         * @return half retention time (year)
-         */
-        public double getHalfRetentionTime() {
-            return this.halfRetentionTime;
-        }
-
-        /**
-         *
-         * @param halfRetentionTime half retention time (year)
-         */
-        public void setHalfRetentionTime(double halfRetentionTime) {
-            this.halfRetentionTime = halfRetentionTime;
-        }
-
-        public double getMaxRetentionPercentage() {
-            return this.maxRetentionPercentage;
-        }
-
-        public void setMaxRetentionPercentage(double maxRetentionPercentage) {
-            this.maxRetentionPercentage = maxRetentionPercentage;
-        }
-
-        public String getParameter() {
-            return this.parameter;
-        }
-
-        public void setParameter(String parameter) {
-            this.parameter = parameter;
-        }
-
     }
 
 }
