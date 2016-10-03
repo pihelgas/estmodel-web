@@ -42,6 +42,69 @@ public class EstModel implements Serializable {
     private Collection<Discharge> discharges;
     private Collection<PointSource> pointSources;
 
+    public static class Discharge implements Serializable {
+
+        private double value;
+        private double retentionPercentage;
+        private String parameter;
+        private LocalDate date;
+        private double atmosphericSpecificDischarge;
+        private double adjustmentCoefficient;
+
+        public Discharge() {
+
+        }
+
+        public double getValue() {
+            return this.value;
+        }
+
+        public void setValue(double value) {
+            this.value = value;
+        }
+
+        public double getRetentionPercentage() {
+            return this.retentionPercentage;
+        }
+
+        public void setRetentionPercentage(double retentionPercentage) {
+            this.retentionPercentage = retentionPercentage;
+        }
+
+        public String getParameter() {
+            return this.parameter;
+        }
+
+        public void setParameter(String parameter) {
+            this.parameter = parameter;
+        }
+
+        public LocalDate getDate() {
+            return this.date;
+        }
+
+        public void setDate(LocalDate date) {
+            this.date = date;
+        }
+
+        public double getAtmosphericSpecificDischarge() {
+            return this.atmosphericSpecificDischarge;
+        }
+
+        public void setAtmosphericSpecificDischarge(double atmosphericSpecificDischarge) {
+            this.atmosphericSpecificDischarge = atmosphericSpecificDischarge;
+        }
+
+        public double getAdjustmentCoefficient() {
+            return this.adjustmentCoefficient;
+        }
+
+        public void setAdjustmentCoefficient(double adjustmentCoefficient) {
+            this.adjustmentCoefficient = adjustmentCoefficient;
+        }
+
+    }
+
     public EstModel() {
 
     }
@@ -311,69 +374,6 @@ public class EstModel implements Serializable {
         this.pointSources = pointSources;
     }
 
-    public static class Discharge implements Serializable {
-
-        private double value;
-        private double retentionPercentage;
-        private String parameter;
-        private LocalDate date;
-        private double atmosphericSpecificDischarge;
-        private double adjustmentCoefficient;
-
-        public Discharge() {
-
-        }
-
-        public double getValue() {
-            return this.value;
-        }
-
-        public void setValue(double value) {
-            this.value = value;
-        }
-
-        public double getRetentionPercentage() {
-            return this.retentionPercentage;
-        }
-
-        public void setRetentionPercentage(double retentionPercentage) {
-            this.retentionPercentage = retentionPercentage;
-        }
-
-        public String getParameter() {
-            return this.parameter;
-        }
-
-        public void setParameter(String parameter) {
-            this.parameter = parameter;
-        }
-
-        public LocalDate getDate() {
-            return this.date;
-        }
-
-        public void setDate(LocalDate date) {
-            this.date = date;
-        }
-
-        public double getAtmosphericSpecificDischarge() {
-            return this.atmosphericSpecificDischarge;
-        }
-
-        public void setAtmosphericSpecificDischarge(double atmosphericSpecificDischarge) {
-            this.atmosphericSpecificDischarge = atmosphericSpecificDischarge;
-        }
-
-        public double getAdjustmentCoefficient() {
-            return this.adjustmentCoefficient;
-        }
-
-        public void setAdjustmentCoefficient(double adjustmentCoefficient) {
-            this.adjustmentCoefficient = adjustmentCoefficient;
-        }
-
-    }
-
     /**
      * EstModel output
      */
@@ -386,6 +386,8 @@ public class EstModel implements Serializable {
         private double atmosphericDischarge;
         private double naturalDischarge;
         private double totalDischarge;
+        private double retentionPercentage;
+        private double adjustmentCoefficient;
 
         public Estimate() {
 
@@ -451,6 +453,22 @@ public class EstModel implements Serializable {
 
         public void setTotalDischarge(double totalDischarge) {
             this.totalDischarge = totalDischarge;
+        }
+
+        public double getRetentionPercentage() {
+            return this.retentionPercentage;
+        }
+
+        public void setRetentionPercentage(double retentionPercentage) {
+            this.retentionPercentage = retentionPercentage;
+        }
+
+        public double getAdjustmentCoefficient() {
+            return this.adjustmentCoefficient;
+        }
+
+        public void setAdjustmentCoefficient(double adjustmentCoefficient) {
+            this.adjustmentCoefficient = adjustmentCoefficient;
         }
 
     }
@@ -526,6 +544,54 @@ public class EstModel implements Serializable {
         private String parameter;
         private String type;
         private int year;
+
+        /**
+         * Lake model output
+         */
+        public static class Estimate implements Serializable {
+
+            private double concentration;
+            private double load;
+            private double retentionPercentage;
+            private double retentionTime;
+
+            public Estimate() {
+
+            }
+
+            public double getConcentration() {
+                return this.concentration;
+            }
+
+            public void setConcentration(double concentration) {
+                this.concentration = concentration;
+            }
+
+            public double getLoad() {
+                return this.load;
+            }
+
+            public void setLoad(double load) {
+                this.load = load;
+            }
+
+            public double getRetentionPercentage() {
+                return this.retentionPercentage;
+            }
+
+            public void setRetentionPercentage(double retentionPercentage) {
+                this.retentionPercentage = retentionPercentage;
+            }
+
+            public double getRetentionTime() {
+                return this.retentionTime;
+            }
+
+            public void setRetentionTime(double retentionTime) {
+                this.retentionTime = retentionTime;
+            }
+
+        }
 
         public Lake() {
 
@@ -657,54 +723,6 @@ public class EstModel implements Serializable {
          */
         public void setYear(int year) {
             this.year = year;
-        }
-
-        /**
-         * Lake model output
-         */
-        public static class Estimate implements Serializable {
-
-            private double concentration;
-            private double load;
-            private double retentionPercentage;
-            private double retentionTime;
-
-            public Estimate() {
-
-            }
-
-            public double getConcentration() {
-                return this.concentration;
-            }
-
-            public void setConcentration(double concentration) {
-                this.concentration = concentration;
-            }
-
-            public double getLoad() {
-                return this.load;
-            }
-
-            public void setLoad(double load) {
-                this.load = load;
-            }
-
-            public double getRetentionPercentage() {
-                return this.retentionPercentage;
-            }
-
-            public void setRetentionPercentage(double retentionPercentage) {
-                this.retentionPercentage = retentionPercentage;
-            }
-
-            public double getRetentionTime() {
-                return this.retentionTime;
-            }
-
-            public void setRetentionTime(double retentionTime) {
-                this.retentionTime = retentionTime;
-            }
-
         }
 
     }
