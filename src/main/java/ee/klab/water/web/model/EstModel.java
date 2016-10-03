@@ -1,6 +1,7 @@
 package ee.klab.water.web.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collection;
 
 /**
@@ -312,21 +313,23 @@ public class EstModel implements Serializable {
 
     public static class Discharge implements Serializable {
 
-        private String parameter;
+        private double value;
         private double retentionPercentage;
-        private double adjustmentCoefficient;
+        private String parameter;
+        private LocalDate date;
         private double atmosphericSpecificDischarge;
+        private double adjustmentCoefficient;
 
         public Discharge() {
 
         }
 
-        public String getParameter() {
-            return this.parameter;
+        public double getValue() {
+            return this.value;
         }
 
-        public void setParameter(String parameter) {
-            this.parameter = parameter;
+        public void setValue(double value) {
+            this.value = value;
         }
 
         public double getRetentionPercentage() {
@@ -337,12 +340,20 @@ public class EstModel implements Serializable {
             this.retentionPercentage = retentionPercentage;
         }
 
-        public double getAdjustmentCoefficient() {
-            return this.adjustmentCoefficient;
+        public String getParameter() {
+            return this.parameter;
         }
 
-        public void setAdjustmentCoefficient(double adjustmentCoefficient) {
-            this.adjustmentCoefficient = adjustmentCoefficient;
+        public void setParameter(String parameter) {
+            this.parameter = parameter;
+        }
+
+        public LocalDate getDate() {
+            return this.date;
+        }
+
+        public void setDate(LocalDate date) {
+            this.date = date;
         }
 
         public double getAtmosphericSpecificDischarge() {
@@ -351,6 +362,14 @@ public class EstModel implements Serializable {
 
         public void setAtmosphericSpecificDischarge(double atmosphericSpecificDischarge) {
             this.atmosphericSpecificDischarge = atmosphericSpecificDischarge;
+        }
+
+        public double getAdjustmentCoefficient() {
+            return this.adjustmentCoefficient;
+        }
+
+        public void setAdjustmentCoefficient(double adjustmentCoefficient) {
+            this.adjustmentCoefficient = adjustmentCoefficient;
         }
 
     }
@@ -685,6 +704,7 @@ public class EstModel implements Serializable {
             public void setRetentionTime(double retentionTime) {
                 this.retentionTime = retentionTime;
             }
+
         }
 
     }
