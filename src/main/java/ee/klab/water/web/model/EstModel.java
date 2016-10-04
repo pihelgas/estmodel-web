@@ -379,7 +379,7 @@ public class EstModel implements Serializable {
      */
     public static class Estimate implements Serializable {
 
-        private int month;
+        private LocalDate date;
         private String parameter;
         private Collection<SourceEstimate> sources;
         private double anthropogenicDischarge;
@@ -393,18 +393,12 @@ public class EstModel implements Serializable {
 
         }
 
-        /**
-         * @return the represented month
-         */
-        public int getMonth() {
-            return this.month;
+        public LocalDate getDate() {
+            return this.date;
         }
 
-        /**
-         * @param month the month-of-year to represent, from 1 to 12
-         */
-        public void setMonth(int month) {
-            this.month = month;
+        public void setDate(LocalDate date) {
+            this.date = date;
         }
 
         public String getParameter() {
