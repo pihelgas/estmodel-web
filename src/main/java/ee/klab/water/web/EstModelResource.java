@@ -90,7 +90,7 @@ public class EstModelResource {
     }
 
 //    private double load(Catchment catchment, long period, Parameter parameter) {
-//
+//      max = 20%, half = 3; //ööp
 //        if (catchment.getPointSources() != null) {
 //            return catchment.getPointSources().stream()
 //                    .mapToDouble(point -> point.getMeasurements()
@@ -224,11 +224,11 @@ public class EstModelResource {
                     estimate.setParameter(d.getParameter()
                             .toString()
                             .toLowerCase());
-                    estimate.setSources(d.getDetails()
+                    estimate.setDiffuseSources(d.getDetails()
                             .stream()
                             .map(s -> {
-                                EstModel.SourceEstimate se
-                                        = new EstModel.SourceEstimate();
+                                EstModel.DiffuseSourceEstimate se
+                                        = new EstModel.DiffuseSourceEstimate();
                                 se.setId(convert(s.getSource()
                                         .toString()));
                                 se.setAnthropogenicDischarge(s.anthropogenic());

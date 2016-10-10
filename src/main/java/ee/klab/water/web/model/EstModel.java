@@ -11,7 +11,6 @@ public class EstModel implements Serializable {
 
     private int year;
     private double area;
-    private double streamVelocity;
     private String naturalDischargeType;
     private double forestArea;
     private double forestSoil1Percentage;
@@ -20,9 +19,6 @@ public class EstModel implements Serializable {
     private double drainedForestPercentage;
     private double fertilizedForestPercentage;
     private double wetLandArea;
-    private double wetLandType1Percentage;
-    private double wetLandType2Percentage;
-    private double wetLandType3Percentage;
     private double waterSurfaceArea;
     private double agriculturalLandArea;
     private double agriculturalLandSoil1Percentage;
@@ -109,6 +105,10 @@ public class EstModel implements Serializable {
 
     }
 
+    public EstModel(int year) {
+        this.year = year;
+    }
+
     /**
      * @return the represented year
      */
@@ -129,17 +129,6 @@ public class EstModel implements Serializable {
 
     public void setArea(double area) {
         this.area = area;
-    }
-
-    /**
-     * @return stream velocity (m/s)
-     */
-    public double getStreamVelocity() {
-        return this.streamVelocity;
-    }
-
-    public void setStreamVelocity(double streamVelocity) {
-        this.streamVelocity = streamVelocity;
     }
 
     public String getNaturalDischargeType() {
@@ -204,30 +193,6 @@ public class EstModel implements Serializable {
 
     public void setWetLandArea(double wetLandArea) {
         this.wetLandArea = wetLandArea;
-    }
-
-    public double getWetLandType1Percentage() {
-        return this.wetLandType1Percentage;
-    }
-
-    public void setWetLandType1Percentage(double wetLandType1Percentage) {
-        this.wetLandType1Percentage = wetLandType1Percentage;
-    }
-
-    public double getWetLandType2Percentage() {
-        return this.wetLandType2Percentage;
-    }
-
-    public void setWetLandType2Percentage(double wetLandType2Percentage) {
-        this.wetLandType2Percentage = wetLandType2Percentage;
-    }
-
-    public double getWetLandType3Percentage() {
-        return this.wetLandType3Percentage;
-    }
-
-    public void setWetLandType3Percentage(double wetLandType3Percentage) {
-        this.wetLandType3Percentage = wetLandType3Percentage;
     }
 
     public double getWaterSurfaceArea() {
@@ -381,7 +346,8 @@ public class EstModel implements Serializable {
 
         private LocalDate date;
         private String parameter;
-        private Collection<SourceEstimate> sources;
+        private Collection<DiffuseSourceEstimate> diffuseSources;
+        private Collection<PointSourceEstimate> pointSources;
         private double anthropogenicDischarge;
         private double atmosphericDischarge;
         private double naturalDischarge;
@@ -391,6 +357,11 @@ public class EstModel implements Serializable {
 
         public Estimate() {
 
+        }
+
+        public Estimate(String parameter, LocalDate date) {
+            this.parameter = parameter;
+            this.date = date;
         }
 
         public LocalDate getDate() {
@@ -409,12 +380,24 @@ public class EstModel implements Serializable {
             this.parameter = parameter;
         }
 
-        public Collection<SourceEstimate> getSources() {
-            return this.sources;
+        public Collection<DiffuseSourceEstimate> getDiffuseSources() {
+            return this.diffuseSources;
         }
 
-        public void setSources(final Collection<SourceEstimate> sources) {
-            this.sources = sources;
+        public void setDiffuseSources(Collection<DiffuseSourceEstimate> diffuseSources) {
+            this.diffuseSources = diffuseSources;
+        }
+
+        /**
+         *
+         * @return PointSorces with loads after retention
+         */
+        public Collection<PointSourceEstimate> getPointSources() {
+            return this.pointSources;
+        }
+
+        public void setPointSources(Collection<PointSourceEstimate> pointSources) {
+            this.pointSources = pointSources;
         }
 
         public double getAnthropogenicDischarge() {
@@ -470,16 +453,21 @@ public class EstModel implements Serializable {
     /**
      * EstModel detailed output
      */
-    public static class SourceEstimate implements Serializable {
+    public static class DiffuseSourceEstimate implements Serializable {
 
         private String id;
+        private Collection<DiffuseSourceEstimate> diffuseSources;
         private double anthropogenicDischarge;
         private double atmosphericDischarge;
         private double naturalDischarge;
         private double totalDischarge;
 
-        public SourceEstimate() {
+        public DiffuseSourceEstimate() {
 
+        }
+
+        public DiffuseSourceEstimate(String id) {
+            this.id = id;
         }
 
         public String getId() {
@@ -488,6 +476,14 @@ public class EstModel implements Serializable {
 
         public void setId(String id) {
             this.id = id;
+        }
+
+        public Collection<DiffuseSourceEstimate> getDiffuseSources() {
+            return this.diffuseSources;
+        }
+
+        public void setDiffuseSources(Collection<DiffuseSourceEstimate> diffuseSources) {
+            this.diffuseSources = diffuseSources;
         }
 
         public double getAnthropogenicDischarge() {
@@ -520,6 +516,38 @@ public class EstModel implements Serializable {
 
         public void setTotalDischarge(double totalDischarge) {
             this.totalDischarge = totalDischarge;
+        }
+
+    }
+
+    public static class PointSourceEstimate implements Serializable {
+
+        private String id;
+        private double discharge;
+
+        public PointSourceEstimate() {
+
+        }
+
+        public PointSourceEstimate(String id, double discharge) {
+            this.id = id;
+            this.discharge = discharge;
+        }
+
+        public String getId() {
+            return this.id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public double getDischarge() {
+            return this.discharge;
+        }
+
+        public void setDischarge(double discharge) {
+            this.discharge = discharge;
         }
 
     }
@@ -589,6 +617,11 @@ public class EstModel implements Serializable {
 
         public Lake() {
 
+        }
+
+        public Lake(String parameter, int year) {
+            this.parameter = parameter;
+            this.year = year;
         }
 
         /**

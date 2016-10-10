@@ -6,6 +6,7 @@ import java.util.Collection;
 public class PointSource implements Serializable {
 
     private double distance;
+    private double id;
     private Collection<Measurement> measurements;
     private String type;
 
@@ -13,8 +14,11 @@ public class PointSource implements Serializable {
 
     }
 
+    public PointSource(double id) {
+        this.id = id;
+    }
+
     /**
-     *
      * @return distance (km) from the station
      */
     public double getDistance() {
@@ -22,11 +26,18 @@ public class PointSource implements Serializable {
     }
 
     /**
-     *
      * @param distance distance (km) from the station
      */
     public void setDistance(double distance) {
         this.distance = distance;
+    }
+
+    public double getId() {
+        return this.id;
+    }
+
+    public void setId(double id) {
+        this.id = id;
     }
 
     public Collection<Measurement> getMeasurements() {
@@ -37,6 +48,9 @@ public class PointSource implements Serializable {
         this.measurements = measurements;
     }
 
+    /**
+     * @return VEKA type
+     */
     public String getType() {
         return this.type;
     }
