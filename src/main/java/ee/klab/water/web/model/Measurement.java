@@ -3,7 +3,7 @@ package ee.klab.water.web.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Measurement implements Serializable, Comparable<Measurement> {
+public class Measurement implements Serializable {
 
     private LocalDate date;
     private String parameter;
@@ -17,11 +17,6 @@ public class Measurement implements Serializable, Comparable<Measurement> {
         this.date = date;
         this.parameter = parameter;
         this.value = value;
-    }
-
-    @Override
-    public int compareTo(Measurement other) {
-        return this.getDate().compareTo(other.getDate());
     }
 
     public LocalDate getDate() {

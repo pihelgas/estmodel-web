@@ -51,6 +51,11 @@ public class EstModel implements Serializable {
 
         }
 
+        public Discharge(String parameter, LocalDate date) {
+            this.parameter = parameter;
+            this.date = date;
+        }
+
         public double getValue() {
             return this.value;
         }
