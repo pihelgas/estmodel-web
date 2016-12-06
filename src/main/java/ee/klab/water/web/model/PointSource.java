@@ -5,16 +5,24 @@ import java.util.Collection;
 
 public class PointSource implements Serializable {
 
-    private double distance;
-    private double id;
-    private Collection<Measurement> measurements;
+    private String id;
     private String type;
+    private double distance;
+    private Collection<Measurement> measurements;
 
     public PointSource() {
 
     }
 
-    public PointSource(double id) {
+    public PointSource(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -32,22 +40,6 @@ public class PointSource implements Serializable {
         this.distance = distance;
     }
 
-    public double getId() {
-        return this.id;
-    }
-
-    public void setId(double id) {
-        this.id = id;
-    }
-
-    public Collection<Measurement> getMeasurements() {
-        return this.measurements;
-    }
-
-    public void setMeasurements(Collection<Measurement> measurements) {
-        this.measurements = measurements;
-    }
-
     /**
      * @return VEKA type
      */
@@ -57,6 +49,14 @@ public class PointSource implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Collection<Measurement> getMeasurements() {
+        return this.measurements;
+    }
+
+    public void setMeasurements(Collection<Measurement> measurements) {
+        this.measurements = measurements;
     }
 
 }

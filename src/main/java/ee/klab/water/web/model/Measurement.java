@@ -7,16 +7,10 @@ public class Measurement implements Serializable {
 
     private LocalDate date;
     private String parameter;
-    private double value;
+    private double discharge;
 
     public Measurement() {
 
-    }
-
-    public Measurement(LocalDate date, String parameter, double value) {
-        this.date = date;
-        this.parameter = parameter;
-        this.value = value;
     }
 
     public LocalDate getDate() {
@@ -35,12 +29,12 @@ public class Measurement implements Serializable {
         this.parameter = parameter;
     }
 
-    public double getValue() {
-        return this.value;
+    public double getDischarge() {
+        return this.discharge;
     }
 
-    public void setValue(double value) {
-        this.value = value;
+    public void setDischarge(double discharge) {
+        this.discharge = discharge;
     }
 
 }
