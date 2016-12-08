@@ -32,6 +32,9 @@ import javax.ws.rs.core.MediaType;
 @Path("/")
 public class EstModelResource {
 
+    /**
+     * WORK IN PROGRESS
+     */
     private final static Comparator<Measurement> DATE = Comparator
             .comparing(Measurement::getDate);
 
@@ -40,8 +43,6 @@ public class EstModelResource {
     protected String nitrogen = "nyld";
     protected String phosphorus = "pyld";
     protected String flow = "veehulk";
-
-    protected String firstLakeType = "";
 
     protected double nitrogenRetentionPercentage = 0; // %
     protected double nitrogenMaxRetentionPercentage = 20; // %
@@ -118,11 +119,11 @@ public class EstModelResource {
                                 PointSourceEstimate estimate = new PointSourceEstimate();
                                 estimate.setId(p.getId());
                                 switch (p.getType()) {
-                                    case "järve":
+                                    case "suurjärv":
                                         estimate.setRetentionPercentage(nitrogenMaxRetentionPercentage);
                                         estimate.setDischarge(discharge * ((100 - nitrogenMaxRetentionPercentage) / 100));
                                         break;
-                                    case "jaama":
+                                    case "seirejaam":
                                         // aeg punktallikast vaadeldava kohani ööpäevades
                                         double time = p.getDistance() * 1000 / streamVelocity / Duration.ofDays(1).getSeconds();
 
@@ -131,8 +132,6 @@ public class EstModelResource {
                                         estimate.setRetentionPercentage(retentionPercentage);
                                         estimate.setDischarge(discharge * ((100 - retentionPercentage) / 100));
                                         break;
-                                    case "seireta":
-                                    case "mättasse":
                                     default:
                                         estimate.setRetentionPercentage(100);
                                         estimate.setDischarge(0.0);
@@ -153,11 +152,11 @@ public class EstModelResource {
                                 PointSourceEstimate estimate = new PointSourceEstimate();
                                 estimate.setId(p.getId());
                                 switch (p.getType()) {
-                                    case "järve":
+                                    case "suurjärv":
                                         estimate.setRetentionPercentage(phosphorusMaxRetentionPercentage);
                                         estimate.setDischarge(discharge * ((100 - phosphorusMaxRetentionPercentage) / 100));
                                         break;
-                                    case "jaama":
+                                    case "seirejaam":
                                         // aeg punktallikast vaadeldava kohani ööpäevades
                                         double time = p.getDistance() * 1000 / streamVelocity / Duration.ofDays(1).getSeconds();
 
@@ -166,8 +165,6 @@ public class EstModelResource {
                                         estimate.setRetentionPercentage(retentionPercentage);
                                         estimate.setDischarge(discharge * ((100 - retentionPercentage) / 100));
                                         break;
-                                    case "seireta":
-                                    case "mättasse":
                                     default:
                                         estimate.setRetentionPercentage(100);
                                         estimate.setDischarge(0.0);
@@ -285,7 +282,7 @@ public class EstModelResource {
                             });
 
                     EstModel.Estimate nitrogenEstimate = new EstModel.Estimate();
-                    nitrogenEstimate.setParameter(convert(Parameter.NITROGEN.toString()));
+                    nitrogenEstimate.setParameter(nitrogen);
                     nitrogenEstimate.setDate(to.minusDays(1));
                     nitrogenEstimate.setAdjustmentCoefficient(nitrogenAdjustmentCoefficient);
                     nitrogenEstimate.setPointSources(nitrogenPointSources);
@@ -310,7 +307,7 @@ public class EstModelResource {
                             })
                             .collect(Collectors.toSet()));
                     EstModel.Estimate phosphorusEstimate = new EstModel.Estimate();
-                    phosphorusEstimate.setParameter(convert(Parameter.PHOSPHORUS.toString()));
+                    phosphorusEstimate.setParameter(phosphorus);
                     phosphorusEstimate.setDate(to.minusDays(1));
                     phosphorusEstimate.setAdjustmentCoefficient(phosphorusAdjustmentCoefficient);
                     phosphorusEstimate.setPointSources(phosphorusPointSources);
