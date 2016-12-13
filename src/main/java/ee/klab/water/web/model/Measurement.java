@@ -40,7 +40,8 @@ public class Measurement implements Serializable {
     /**
      *
      * @return discharge from previous measurement to this one or from the
-     * beginning of the year (kg for nitrogen and phosphorus, m3 for flow)
+     * beginning of the year (kg/day for nitrogen and phosphorus, m3/day for
+     * flow)
      */
     public double getDischarge() {
         return this.discharge;
@@ -49,7 +50,8 @@ public class Measurement implements Serializable {
     /**
      *
      * @param discharge discharge from previous measurement to this one or from
-     * the beginning of the year (kg for nitrogen and phosphorus, m3 for flow)
+     * the beginning of the year (kg/day for nitrogen and phosphorus, m3/day for
+     * flow)
      */
     public void setDischarge(double discharge) {
         this.discharge = discharge;

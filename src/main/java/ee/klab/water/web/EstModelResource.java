@@ -74,7 +74,7 @@ public class EstModelResource {
                 .collect(Collectors.groupingBy(Measurement::getParameter))
                 .values()
                 .stream()
-                .flatMap(ms -> interpolate(convert(ms.stream())))
+                .flatMap(ms -> interpolate(ms.stream()))
                 .collect(Collectors.toSet());
 
         final Set<PointSource> pointSources = Optional
@@ -94,7 +94,7 @@ public class EstModelResource {
                             .collect(Collectors.groupingBy(Measurement::getParameter))
                             .entrySet()
                             .stream()
-                            .flatMap(e -> interpolate(convert(e.getValue().stream())))
+                            .flatMap(e -> interpolate(e.getValue().stream()))
                             .collect(Collectors.toSet()));
                     return pointSource;
                 }).collect(Collectors.toSet());
@@ -435,7 +435,7 @@ public class EstModelResource {
 
     }
 
-    protected Stream<Measurement> convert(Stream<Measurement> stream) {
+    private Stream<Measurement> convert(Stream<Measurement> stream) {
 
         final Set<Measurement> measurements = stream
                 .collect(Collectors.toSet());

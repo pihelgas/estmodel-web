@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ee.klab.water</groupId>
     <artifactId>estmodel-web</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
     <packaging>war</packaging>
     <name>EstModel Web</name>
     <properties>
