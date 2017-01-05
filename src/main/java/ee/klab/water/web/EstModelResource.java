@@ -32,6 +32,9 @@ import javax.ws.rs.core.MediaType;
 @Path("/")
 public class EstModelResource {
 
+    protected final static double NITROGEN_MINIMUM_DIFFUSE_CONCENTRATION = 0.73; // mg/l
+    protected final static double PHOSPHORUS_MINIMUM_DIFFUSE_CONCENTRATION = 0.016; // mg/l
+
     /**
      * WORK IN PROGRESS
      */
@@ -178,19 +181,32 @@ public class EstModelResource {
                             .filter(m -> flow.equalsIgnoreCase(m.getParameter()))
                             .filter(isInTimestep)
                             .collect(Collectors.toSet());
+
                     final Set<Measurement> nitrogenMeasurements = measurements
                             .parallelStream()
                             .filter(m -> nitrogen.equalsIgnoreCase(m.getParameter()))
                             .filter(isInTimestep)
                             .collect(Collectors.toSet());
+
                     final Set<Measurement> phosphorusMeasurements = measurements
                             .parallelStream()
                             .filter(m -> phosphorus.equalsIgnoreCase(m.getParameter()))
                             .filter(isInTimestep)
                             .collect(Collectors.toSet());
 
-                    double nitrogenPointSourceDischarge = nitrogenPointSources.stream().mapToDouble(PointSourceEstimate::getDischarge).sum();
-                    double phosphorusPointSourceDischarge = phosphorusPointSources.stream().mapToDouble(PointSourceEstimate::getDischarge).sum();
+                    final double nitrogenPointSourceDischarge
+                            = nitrogenPointSources.stream()
+                                    .mapToDouble(PointSourceEstimate::getDischarge)
+                                    .sum();
+
+                    final double phosphorusPointSourceDischarge
+                            = phosphorusPointSources.stream()
+                                    .mapToDouble(PointSourceEstimate::getDischarge)
+                                    .sum();
+
+                    final double runoff = flowMeasurements.stream()
+                            .mapToDouble(Measurement::getDischarge)
+                            .sum();
 
                     final ee.klab.water.EstModel estModel = new Builder(from, to)
                             .area(model
@@ -237,8 +253,8 @@ public class EstModelResource {
                                     .getIndividualInfilitrationSepticSystemPercentage())
                             .aquacultureProduction(model
                                     .getAquacultureProduction())
-                            .runoff(flowMeasurements.stream().mapToDouble(Measurement::getDischarge).sum()
-                                    / SECONDS.between(from.atStartOfDay(), to.atStartOfDay()))
+                            .runoff(runoff / SECONDS
+                                    .between(from.atStartOfDay(), to.atStartOfDay()))
                             .build();
 
                     Estimation nitrogenEstimation = estModel.getEstimations()
@@ -251,6 +267,31 @@ public class EstModelResource {
                             .filter(e -> Parameter.PHOSPHORUS.equals(e.getParameter()))
                             .findAny().get();
 
+                    final double nitrogenDischarge = nitrogenMeasurements
+                            .stream()
+                            .mapToDouble(Measurement::getDischarge)
+                            .sum();
+
+                    final double phosphorusDischarge = phosphorusMeasurements
+                            .stream()
+                            .mapToDouble(Measurement::getDischarge)
+                            .sum();
+
+                    final double nitrogenDiffuseDischarge;
+                    final double phosphorusDiffuseDischarge;
+
+                    if ((nitrogenDischarge - nitrogenPointSourceDischarge) * 1000 / runoff < NITROGEN_MINIMUM_DIFFUSE_CONCENTRATION) {
+                        nitrogenDiffuseDischarge = NITROGEN_MINIMUM_DIFFUSE_CONCENTRATION * runoff / 1000;
+                    } else {
+                        nitrogenDiffuseDischarge = nitrogenDischarge - nitrogenPointSourceDischarge;
+                    }
+
+                    if ((phosphorusDischarge - phosphorusPointSourceDischarge) * 1000 / runoff < PHOSPHORUS_MINIMUM_DIFFUSE_CONCENTRATION) {
+                        phosphorusDiffuseDischarge = PHOSPHORUS_MINIMUM_DIFFUSE_CONCENTRATION * runoff / 1000;
+                    } else {
+                        phosphorusDiffuseDischarge = phosphorusDischarge - phosphorusPointSourceDischarge;
+                    }
+
                     double nitrogenAdjustmentCoefficient = Optional
                             .ofNullable(model.getAdjustments())
                             .orElse(Collections.emptySet())
@@ -261,7 +302,7 @@ public class EstModelResource {
                             .findFirst()
                             .orElseGet(() -> {
                                 if (!nitrogenMeasurements.isEmpty()) {
-                                    return nitrogenMeasurements.stream().mapToDouble(Measurement::getDischarge).sum() / nitrogenEstimation.total();
+                                    return nitrogenDiffuseDischarge / nitrogenEstimation.total();
                                 }
                                 return 1;
                             });
@@ -276,7 +317,7 @@ public class EstModelResource {
                             .findFirst()
                             .orElseGet(() -> {
                                 if (!phosphorusMeasurements.isEmpty()) {
-                                    return phosphorusMeasurements.stream().mapToDouble(Measurement::getDischarge).sum() / phosphorusEstimation.total();
+                                    return phosphorusDiffuseDischarge / phosphorusEstimation.total();
                                 }
                                 return 1;
                             });
