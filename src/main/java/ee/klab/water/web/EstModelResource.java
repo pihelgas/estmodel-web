@@ -122,11 +122,11 @@ public class EstModelResource {
                                 PointSourceEstimate estimate = new PointSourceEstimate();
                                 estimate.setId(p.getId());
                                 switch (p.getType()) {
-                                    case "suurjärv":
+                                    case "1":
                                         estimate.setRetentionPercentage(nitrogenMaxRetentionPercentage);
                                         estimate.setDischarge(discharge * ((100 - nitrogenMaxRetentionPercentage) / 100));
                                         break;
-                                    case "seirejaam":
+                                    case "4":
                                         // aeg punktallikast vaadeldava kohani ööpäevades
                                         double time = p.getDistance() * 1000 / streamVelocity / Duration.ofDays(1).getSeconds();
 
@@ -155,11 +155,11 @@ public class EstModelResource {
                                 PointSourceEstimate estimate = new PointSourceEstimate();
                                 estimate.setId(p.getId());
                                 switch (p.getType()) {
-                                    case "suurjärv":
+                                    case "1":
                                         estimate.setRetentionPercentage(phosphorusMaxRetentionPercentage);
                                         estimate.setDischarge(discharge * ((100 - phosphorusMaxRetentionPercentage) / 100));
                                         break;
-                                    case "seirejaam":
+                                    case "4":
                                         // aeg punktallikast vaadeldava kohani ööpäevades
                                         double time = p.getDistance() * 1000 / streamVelocity / Duration.ofDays(1).getSeconds();
 
