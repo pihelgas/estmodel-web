@@ -1,9 +1,9 @@
 package ee.klab.water.web;
 
-import ee.klab.water.EstModel.Builder;
-import ee.klab.water.EstModel.Estimation;
-import ee.klab.water.EstModel.Parameter;
-import ee.klab.water.EstModel.Source;
+import ee.klab.estmodel.EstModel.Builder;
+import ee.klab.estmodel.EstModel.Estimation;
+import ee.klab.estmodel.EstModel.Parameter;
+import ee.klab.estmodel.EstModel.Source;
 import ee.klab.water.web.model.EstModel;
 import ee.klab.water.web.model.EstModel.PointSourceEstimate;
 import ee.klab.water.web.model.Measurement;
@@ -60,7 +60,7 @@ public class EstModelResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<EstModel.Estimate> post(final EstModel model) {
+    public List<EstModel.Estimate> postEstModel(final EstModel model) {
 
         final LocalDate start = Year.of(model.getYear()).atDay(1);
         final LocalDate end = start.plusYears(1);
@@ -208,7 +208,7 @@ public class EstModelResource {
                             .mapToDouble(Measurement::getDischarge)
                             .sum();
 
-                    final ee.klab.water.EstModel estModel = new Builder(from, to)
+                    final ee.klab.estmodel.EstModel estModel = new Builder(start, end)
                             .area(model
                                     .getArea())
                             .forestArea(model
@@ -255,6 +255,7 @@ public class EstModelResource {
                                     .getAquacultureProduction())
                             .runoff(runoff / SECONDS
                                     .between(from.atStartOfDay(), to.atStartOfDay()))
+                            .nitrogenAdjustmentCoefficient(1000)
                             .build();
 
                     Estimation nitrogenEstimation = estModel.getEstimations()
@@ -380,11 +381,11 @@ public class EstModelResource {
     }
 
     @POST
-    @Path("/lake")
+    @Path("lake")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
 
-    public EstModel.Lake.Estimate post(final EstModel.Lake model) {
+    public EstModel.Lake.Estimate postLakeEstModel(final EstModel.Lake model) {
 
 //        if (!Parameter.PHOSPHORUS.toString()
 //                .equalsIgnoreCase(model.getParameter())) {
