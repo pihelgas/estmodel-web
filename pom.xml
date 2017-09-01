@@ -27,7 +27,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>estmodel-web</finalName>
+        <finalName>estmodel</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
