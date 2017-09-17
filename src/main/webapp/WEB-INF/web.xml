@@ -9,6 +9,10 @@
         <filter-name>javax.ws.rs.core.Application</filter-name>
         <filter-class>org.glassfish.jersey.servlet.ServletContainer</filter-class>
         <init-param>
+            <param-name>jersey.config.disableAutoDiscovery</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
             <param-name>jersey.config.server.provider.classnames</param-name>
             <param-value>
                 ee.klab.estmodel.web.CrossOriginResourceSharingFilter,
@@ -16,10 +20,6 @@
                 ee.klab.estmodel.web.ObjectMapperProvider,
                 org.glassfish.jersey.jackson.JacksonFeature
             </param-value>
-        </init-param>
-        <init-param>
-            <param-name>jersey.config.disableAutoDiscovery</param-name>
-            <param-value>true</param-value>
         </init-param>
         <init-param>
             <param-name>jersey.config.servlet.filter.forwardOn404</param-name>

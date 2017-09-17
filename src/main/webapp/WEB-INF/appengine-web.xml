@@ -7,6 +7,7 @@
         <max-concurrent-requests>80</max-concurrent-requests>
         <min-idle-instances>1</min-idle-instances>
         <max-idle-instances>1</max-idle-instances>
-        <max-pending-latency>10s</max-pending-latency>
+        <min-pending-latency>10s</min-pending-latency>
+        <max-pending-latency>15s</max-pending-latency>
     </automatic-scaling>
 </appengine-web-app>
