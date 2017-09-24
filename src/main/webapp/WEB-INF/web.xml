@@ -9,6 +9,10 @@
         <filter-name>javax.ws.rs.core.Application</filter-name>
         <filter-class>org.glassfish.jersey.servlet.ServletContainer</filter-class>
         <init-param>
+            <param-name>jersey.config.beanValidation.enableOutputValidationErrorEntity.server</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
             <param-name>jersey.config.disableAutoDiscovery</param-name>
             <param-value>true</param-value>
         </init-param>
@@ -18,7 +22,8 @@
                 ee.klab.estmodel.web.CrossOriginResourceSharingFilter,
                 ee.klab.estmodel.web.ModelResource,
                 ee.klab.estmodel.web.ObjectMapperProvider,
-                org.glassfish.jersey.jackson.JacksonFeature
+                org.glassfish.jersey.jackson.JacksonFeature,
+                org.glassfish.jersey.server.validation.ValidationFeature
             </param-value>
         </init-param>
         <init-param>
