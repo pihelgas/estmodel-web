@@ -18,7 +18,7 @@ public final class ModelResource {
     @Path("estmodel")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public EstModel runEstModel(@NotNull @Valid EstModel model) {
+    public EstModel runEstModel(@Valid @NotNull EstModel model) {
 
         return model;
 
@@ -28,7 +28,7 @@ public final class ModelResource {
     @Path("lake-estmodel")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public LakeEstModel runLakeEstModel(@NotNull @Valid LakeEstModel model) {
+    public LakeEstModel runLakeEstModel(@Valid @NotNull LakeEstModel model) {
 
         return model;
 
@@ -38,7 +38,7 @@ public final class ModelResource {
     @Path("mixing-zone")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public MixingZone runMixingZoneModel(@NotNull @Valid MixingZone model) {
+    public MixingZone runMixingZoneModel(@Valid @NotNull MixingZone model) {
 
         return model;
 

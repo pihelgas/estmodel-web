@@ -11,8 +11,8 @@ public final class CrossOriginResourceSharingFilter
         implements ContainerResponseFilter {
 
     @Override
-    public void filter(final ContainerRequestContext requestContext,
-            final ContainerResponseContext response) {
+    public void filter(ContainerRequestContext request,
+            ContainerResponseContext response) {
 
         final MultivaluedMap<String, Object> headers = response.getHeaders();
 
