@@ -15,7 +15,6 @@ public final class ObjectMapperProvider implements ContextResolver<ObjectMapper>
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .enable(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS)
             .enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING)
-            .enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL)
             .enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)
             .registerModule(new JavaTimeModule());
 
