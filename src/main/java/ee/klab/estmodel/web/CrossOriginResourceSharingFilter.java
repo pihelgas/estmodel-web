@@ -16,9 +16,10 @@ public final class CrossOriginResourceSharingFilter
 
         final MultivaluedMap<String, Object> headers = response.getHeaders();
 
-        headers.putSingle("Access-Control-Allow-Origin", "*");
-        headers.putSingle("Access-Control-Allow-Methods", "OPTIONS, POST");
         headers.putSingle("Access-Control-Allow-Headers", "Content-Type");
+        headers.putSingle("Access-Control-Allow-Methods", "OPTIONS, POST");
+        headers.putSingle("Access-Control-Allow-Origin", '*');
+        headers.putSingle("Access-Control-Max-Age", 86400);
 
     }
 
