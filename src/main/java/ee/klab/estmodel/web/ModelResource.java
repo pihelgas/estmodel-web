@@ -20,6 +20,8 @@ public final class ModelResource {
     @Produces(MediaType.APPLICATION_JSON)
     public EstModel runEstModel(@Valid @NotNull EstModel model) {
 
+        model.run();
+
         return model;
 
     }
@@ -30,6 +32,8 @@ public final class ModelResource {
     @Produces(MediaType.APPLICATION_JSON)
     public LakeEstModel runLakeEstModel(@Valid @NotNull LakeEstModel model) {
 
+        model.run();
+
         return model;
 
     }
@@ -38,9 +42,9 @@ public final class ModelResource {
     @Path("mixing-zone")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public MixingZone runMixingZoneModel(@Valid @NotNull MixingZone model) {
+    public MixingZone runMixingZoneModel(@Valid @NotNull MixingZone zone) {
 
-        return model;
+        return zone;
 
     }
 
