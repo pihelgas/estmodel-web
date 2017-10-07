@@ -42,9 +42,9 @@ public final class ModelResource {
     @Path("mixing-zone")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public MixingZone runMixingZoneModel(@Valid @NotNull MixingZone zone) {
+    public MixingZone runMixingZoneModel(@Valid @NotNull MixingZone model) {
 
-        return zone;
+        return model;
 
     }
 
