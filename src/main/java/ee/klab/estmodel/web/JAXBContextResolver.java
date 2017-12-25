@@ -1,6 +1,7 @@
 package ee.klab.estmodel.web;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
@@ -18,6 +19,7 @@ public final class JAXBContextResolver implements ContextResolver<ObjectMapper> 
             .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING)
+            .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
             .enable(SerializationFeature.USE_EQUALITY_FOR_OBJECT_ID)
             .enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)
             .registerModule(new JavaTimeModule())
