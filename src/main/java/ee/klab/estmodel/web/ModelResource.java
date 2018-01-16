@@ -2,7 +2,7 @@ package ee.klab.estmodel.web;
 
 import ee.klab.estmodel.EstModel;
 import ee.klab.estmodel.LakeEstModel;
-import ee.klab.estmodel.MixingZone;
+import ee.klab.estmodel.MixingZoneModel;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
@@ -42,7 +42,9 @@ public final class ModelResource {
     @Path("mixing-zone")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public MixingZone runMixingZoneModel(@Valid @NotNull MixingZone model) {
+    public MixingZoneModel runMixingZoneModel(@Valid @NotNull MixingZoneModel model) {
+
+        model.run();
 
         return model;
 
