@@ -20,13 +20,14 @@ public final class JAXBContextResolver implements ContextResolver<ObjectMapper> 
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING)
             .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
+            .enable(SerializationFeature.INDENT_OUTPUT)
             .enable(SerializationFeature.USE_EQUALITY_FOR_OBJECT_ID)
             .enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)
             .registerModule(new JavaTimeModule())
             .registerModule(new Jdk8Module());
 
     @Override
-    public ObjectMapper getContext(final Class<?> type) {
+    public ObjectMapper getContext(Class<?> type) {
         return DEFAULT;
     }
 

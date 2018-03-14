@@ -10,4 +10,8 @@
         <min-pending-latency>10s</min-pending-latency>
         <max-pending-latency>15s</max-pending-latency>
     </automatic-scaling>
+    <static-error-handlers>
+        <handler file="503.txt" />
+        <handler file="504.txt" error-code="timeout" />
+    </static-error-handlers>
 </appengine-web-app>
