@@ -18,6 +18,7 @@ public final class JAXBContextResolver implements ContextResolver<ObjectMapper> 
     private static final ObjectMapper DEFAULT = new ObjectMapper()
             .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+            .enable(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS)
             .enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING)
             .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
             .enable(SerializationFeature.INDENT_OUTPUT)
