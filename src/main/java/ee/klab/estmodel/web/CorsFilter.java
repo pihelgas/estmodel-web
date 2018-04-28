@@ -7,15 +7,13 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public final class CrossOriginResourceSharingFilter
-        implements ContainerResponseFilter {
+public final class CorsFilter implements ContainerResponseFilter {
 
     @Override
     public void filter(ContainerRequestContext request,
             ContainerResponseContext response) {
 
-        final MultivaluedMap<String, Object> headers = response.getHeaders();
-
+        MultivaluedMap<String, Object> headers = response.getHeaders();
         headers.putSingle("Access-Control-Allow-Headers", "Content-Type");
         headers.putSingle("Access-Control-Allow-Methods", "OPTIONS, POST");
         headers.putSingle("Access-Control-Allow-Origin", '*');

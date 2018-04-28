@@ -13,7 +13,7 @@ import javax.ws.rs.ext.Provider;
 
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
-public final class JAXBContextResolver implements ContextResolver<ObjectMapper> {
+public final class JsonbContextResolver implements ContextResolver<ObjectMapper> {
 
     private static final ObjectMapper DEFAULT = new ObjectMapper()
             .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)

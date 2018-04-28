@@ -17,10 +17,14 @@
             <param-value>true</param-value>
         </init-param>
         <init-param>
+            <param-name>jersey.config.server.mediaTypeMappings</param-name>
+            <param-value>json: application/json</param-value>
+        </init-param>
+        <init-param>
             <param-name>jersey.config.server.provider.classnames</param-name>
             <param-value>
-                ee.klab.estmodel.web.CrossOriginResourceSharingFilter,
-                ee.klab.estmodel.web.JAXBContextResolver,
+                ee.klab.estmodel.web.CorsFilter,
+                ee.klab.estmodel.web.JsonbContextResolver,
                 ee.klab.estmodel.web.ModelResource,
                 org.glassfish.jersey.jackson.JacksonFeature,
                 org.glassfish.jersey.server.validation.ValidationFeature
