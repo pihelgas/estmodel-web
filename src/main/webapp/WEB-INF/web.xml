@@ -2,8 +2,40 @@
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1" metadata-complete="true">
     <display-name>EstModel</display-name>
     <error-page>
+        <error-code>400</error-code>
+        <location>/400.txt</location>  
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403.txt</location>  
+    </error-page>
+    <error-page>
         <error-code>404</error-code>
         <location>/404.txt</location>  
+    </error-page>
+    <error-page>
+        <error-code>405</error-code>
+        <location>/405.txt</location>  
+    </error-page>
+    <error-page>
+        <error-code>406</error-code>
+        <location>/406.txt</location>  
+    </error-page>
+    <error-page>
+        <error-code>415</error-code>
+        <location>/415.txt</location>  
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/500.txt</location>  
+    </error-page>
+    <error-page>
+        <error-code>503</error-code>
+        <location>/503.txt</location>  
+    </error-page>
+    <error-page>
+        <error-code>504</error-code>
+        <location>/504.txt</location>  
     </error-page>
     <filter>
         <filter-name>javax.ws.rs.core.Application</filter-name>
@@ -27,6 +59,7 @@
                 ee.klab.estmodel.web.JsonbContextResolver,
                 ee.klab.estmodel.web.ModelResource,
                 org.glassfish.jersey.jackson.JacksonFeature,
+                org.glassfish.jersey.server.filter.UriConnegFilter
                 org.glassfish.jersey.server.validation.ValidationFeature
             </param-value>
         </init-param>
