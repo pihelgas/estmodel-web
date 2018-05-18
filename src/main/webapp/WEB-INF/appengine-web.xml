@@ -4,11 +4,10 @@
     <threadsafe>true</threadsafe>
     <url-stream-handler>urlfetch</url-stream-handler>
     <automatic-scaling>
-        <max-concurrent-requests>80</max-concurrent-requests>
-        <min-idle-instances>1</min-idle-instances>
+        <max-instances>1</max-instances>
         <max-idle-instances>1</max-idle-instances>
-        <min-pending-latency>10s</min-pending-latency>
-        <max-pending-latency>15s</max-pending-latency>
+        <min-instances>1</min-instances>
+        <min-idle-instances>1</min-idle-instances>
     </automatic-scaling>
     <static-error-handlers>
         <handler file="503.txt" />
