@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+    <automatic-scaling>
+        <max-idle-instances>1</max-idle-instances>
+        <max-instances>1</max-instances>
+        <min-idle-instances>1</min-idle-instances>
+        <min-instances>1</min-instances>
+    </automatic-scaling>
     <runtime>java8</runtime>
+    <static-error-handlers>
+        <handler file="503.txt"/>
+        <handler file="504.txt" error-code="timeout"/>
+    </static-error-handlers>
     <threadsafe>true</threadsafe>
     <url-stream-handler>urlfetch</url-stream-handler>
-    <automatic-scaling>
-        <max-instances>1</max-instances>
-        <max-idle-instances>1</max-idle-instances>
-        <min-instances>1</min-instances>
-        <min-idle-instances>1</min-idle-instances>
-    </automatic-scaling>
-    <static-error-handlers>
-        <handler file="503.txt" />
-        <handler file="504.txt" error-code="timeout" />
-    </static-error-handlers>
 </appengine-web-app>
