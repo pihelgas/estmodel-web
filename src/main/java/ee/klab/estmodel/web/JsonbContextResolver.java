@@ -1,5 +1,7 @@
 package ee.klab.estmodel.web;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -13,10 +15,11 @@ public final class JsonbContextResolver implements ContextResolver<ObjectMapper>
 
     private final ObjectMapper defaultObjectMapper = new ObjectMapper()
             .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+            .enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT)
             .enable(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS)
             .enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING)
             .enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)
+            .setDefaultSetterInfo(JsonSetter.Value.forValueNulls(Nulls.SKIP))
             .registerModule(new AfterburnerModule())
             .registerModule(new Jdk8Module());
 
