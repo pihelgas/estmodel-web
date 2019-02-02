@@ -12,42 +12,29 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("models")
-public final class ModelResource {
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+public class ModelResource {
 
     @POST
     @Path("estmodel")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public EstModel runEstModel(@Valid @NotNull EstModel model) {
-
         model.run();
-
         return model;
-
     }
 
     @POST
     @Path("lake-estmodel")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public LakeEstModel runLakeEstModel(@Valid @NotNull LakeEstModel model) {
-
         model.run();
-
         return model;
-
     }
 
     @POST
     @Path("mixing-zone")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public MixingZoneModel runMixingZoneModel(@Valid @NotNull MixingZoneModel model) {
-
         model.run();
-
         return model;
-
     }
 
 }
